@@ -18,8 +18,8 @@
     </developers>
 
     <properties>
-		<maven.version>3.0</maven.version>
-		<scala.version>2.9.2</scala.version>
+        <maven.version>3.0</maven.version>
+        <scala.version>2.9.2</scala.version>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <encoding>UTF-8</encoding>
@@ -27,7 +27,7 @@
 
 
     <prerequisites>
-		<maven>${maven.version}</maven>
+        <maven>${maven.version}</maven>
     </prerequisites>
 
     <build>
@@ -75,13 +75,13 @@
         </plugins>
     </build>
 
-	<repositories>
-		<repository>
-			<id>scala-tools.org</id>
-			<name>Scala-tools Maven2 Repository</name>
-			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+        </repository>
+    </repositories>
 
     <pluginRepositories>
         <pluginRepository>
@@ -89,19 +89,19 @@
             <name>Scala-Tools Maven2 Repository</name>
             <url>https://oss.sonatype.org/content/groups/scala-tools/</url>
         </pluginRepository>
-    </pluginRepositories>	
+    </pluginRepositories>
 
     <dependencies>
-		<dependency>  
-			<groupId>org.scala-lang</groupId>  
-			<artifactId>scala-library</artifactId>  
-			<version>${scala.version}</version>  
-		</dependency>
-		<dependency>  
-			<groupId>org.scala-lang</groupId>  
-			<artifactId>scala-compiler</artifactId>  
-			<version>${scala.version}</version>  
-		</dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
 
         <!-- Core -->
         <dependency>
@@ -116,7 +116,7 @@
             <artifactId>scala-io-file_${scala.version}</artifactId>
             <version>0.4.1-seq</version>
         </dependency>
-		
+
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -162,16 +162,16 @@
             <version>${maven.version}</version>
         </dependency>
 
-		<dependency>
-			<groupId>org.apache.maven.plugin-tools</groupId>
-			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.2</version>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.2</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-			<version>${maven.version}</version>
+            <version>${maven.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -182,12 +182,12 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-model</artifactId>
-			<version>${maven.version}</version>
+            <version>${maven.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-artifact</artifactId>
-			<version>${maven.version}</version>
+            <version>${maven.version}</version>
         </dependency>
 
         <!-- Commons Libraries -->
