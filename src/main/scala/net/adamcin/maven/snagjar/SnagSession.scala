@@ -46,7 +46,6 @@ class SnagSession(val filter: String,
 
   val indexRes = Resource.fromFile(indexFile)
   def filterTeeIndex(s: Snaggable): Boolean = {
-    log.error("[filterTeeIndex] file={}, gav={}", indexRes, s.gav.toString)
     indexRes.write(s.gav.toString + "\n")
     true
   }
@@ -56,14 +55,13 @@ class SnagSession(val filter: String,
     case None => Stream.empty[Snaggable]
   }
 
-  private def streamFromFile(file: File): Stream[Snaggable] =
+  private def streamFromFile(file: File): Stream[Snaggable] = {
     if (!file.isDirectory) {
       streamFromJar(file)
-    } else if (recursive) {
-      streamFromDir(file)
     } else {
-      Stream.empty[Snaggable]
+      streamFromDir(file)
     }
+  }
 
   private def streamFromFiles(files: Stream[File]): Stream[Snaggable] = {
     files match {
@@ -74,7 +72,6 @@ class SnagSession(val filter: String,
   }
 
   private def streamFromJar(jar: File): Stream[Snaggable] = {
-    log.error("[streamFromJar] path={}", jar.getAbsolutePath)
     Option(Snaggable(jar, this)) match {
       case Some(snaggable) => Stream(snaggable)
       case None => Stream.empty[Snaggable]
@@ -82,7 +79,7 @@ class SnagSession(val filter: String,
   }
 
   private def streamFromDir(dir: File): Stream[Snaggable] =
-    streamFromFiles(dir.listFiles(SnagSession.DIR_FILTER).toStream)
+    streamFromFiles(dir.listFiles(SnagSession.DIR_FILTER).toStream.filter((f: File) => recursive || !f.isDirectory))
 }
 
 object SnagSession {
@@ -104,14 +101,8 @@ object SnagSession {
   val PROP_ARTIFACT_ID = "artifactId"
   val PROP_VERSION = "version"
 
-  val metaFilter = (je: JarEntry) => {
-    val matches = je.getName.startsWith(METADATA_PREFIX) && je.getName.endsWith(METADATA_SUFFIX)
-    log.error("[metaFilter] entry={}, matches={}", je.getName, matches)
-    matches
-  }
-
+  val metaFilter = (je: JarEntry) => je.getName.startsWith(METADATA_PREFIX) && je.getName.endsWith(METADATA_SUFFIX)
   val pomFilter = (je: JarEntry) => je.getName.startsWith(METADATA_PREFIX) && je.getName.endsWith(POM_SUFFIX)
-  val jarFilter = (je: JarEntry) => je.getName.endsWith(JAR_SUFFIX)
 
   val inputCloser = new CloseAction[InputStream] {
     protected def closeImpl(resource: InputStream) =
@@ -143,38 +134,26 @@ object SnagSession {
     propsPath.substring(0, propsPath.length - METADATA_SUFFIX.length) + POM_SUFFIX
 
   def extract(file: File, session: SnagSession): Snaggable = {
-
-    log.error("[extract] file={}", file.getAbsolutePath)
-
     val jar = new JarFile(file)
-    log.error("[extract] jar isEmpty?={} exists?={}", Option(jar).isEmpty, file.exists())
     val opener = jarEntryOpener(jar)
 
     val embeddedMetas =
       JavaConversions.enumerationAsScalaIterator(jar.entries()).filter(metaFilter)
 
-    log.error("[extract] embeddedMetas is empty?={}", embeddedMetas.isEmpty)
-
     val extractedMetas = embeddedMetas.map((metaEntry: JarEntry) => {
       val pomEntry = jar.getJarEntry(propsPathToPomPath(metaEntry.getName))
-      log.error("[extract] pomEntry={}", pomEntry.getName)
       val gav =
         Resource.fromInputStream(opener(metaEntry)).
           addCloseAction(inputCloser).acquireAndGet(readGAV)
 
-      log.error("[extract] gav={}", gav)
-
       (Option(gav), Option(pomEntry)) match {
         case (Some(meta), Some(je)) => {
           val pom = session.createTempFile
-          log.error("[extract] pomFile={}", pom.getAbsolutePath)
           Resource.fromFile(pom).doCopyFrom(Resource.fromInputStream(opener(pomEntry)))
           (meta, pom)
         }
       }
     }).toList
-
-    log.error("[extract] extractedMetas={}", extractedMetas)
 
     // partial function application FTW!!!
     val extractor = extractDependencies(new MavenXpp3Reader)_
@@ -183,30 +162,27 @@ object SnagSession {
       case _ => false
     }).map(extractor).foldLeft(List.empty[GAV])((list, triple) => triple._3 ::: list).toSet
 
-    log.error("[extract] allDeps={}", allDeps)
-
     extractedMetas.filterNot((meta: (GAV, File)) => allDeps.contains(meta._1)) match {
       case (gav, pom) :: Nil => new Snaggable(session, gav, file, pom)
     }
   }
 
+  def applyReader(modelReader: MavenXpp3Reader)(in: InputStream): Model = modelReader.read(in)
+
   def extractDependencies(modelReader: MavenXpp3Reader)(extractedMeta: (GAV, File)): (GAV, File, List[GAV]) = {
     extractedMeta match {
       case (gav: GAV, pom: File) => {
-        Resource.fromFile(pom).inputStream.addCloseAction(inputCloser).acquireFor(modelReader.read) match {
-          case model: Model => {
-            val deps = Option(model.getDependencies) match {
-              case Some(deps) =>
-                JavaConversions.collectionAsScalaIterable(deps).map((dep: Dependency) => {
-                  GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion)
-                }).toList
-              case _ => List.empty[GAV]
-            }
-            (gav, pom, deps) // return triple
-          }
-          case exs: List[Throwable] => log.error("[extractDependencies] Exception", exs(0)); null
+        val model = Resource.fromFile(pom).inputStream.acquireAndGet(applyReader(modelReader)_)
+        val deps = Option(model.getDependencies) match {
+          case Some(deps) =>
+            JavaConversions.collectionAsScalaIterable(deps).map((dep: Dependency) => {
+              GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion)
+            }).toList
+          case _ => List.empty[GAV]
         }
+        (gav, pom, deps) // return triple
       }
     }
   }
+
 }
