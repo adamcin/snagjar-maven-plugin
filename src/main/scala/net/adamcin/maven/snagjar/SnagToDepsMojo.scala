@@ -34,6 +34,7 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
   override def begin() {
     super.begin()
     model.setDependencyManagement(dm)
+    if (depsFile.exists()) { depsFile.delete() }
   }
 
   def snagArtifact(artifact: Snaggable) {
@@ -50,6 +51,8 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
 
     val sorted = JavaConversions.collectionAsScalaIterable(dm.getDependencies).toList.sortWith(depLtDep)
     dm.setDependencies(JavaConversions.seqAsJavaList(sorted))
+
+    getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
     Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
   }

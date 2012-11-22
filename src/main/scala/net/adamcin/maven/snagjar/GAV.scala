@@ -1,6 +1,5 @@
 package net.adamcin.maven.snagjar
 
-import java.util.Properties
 
 /**
  *

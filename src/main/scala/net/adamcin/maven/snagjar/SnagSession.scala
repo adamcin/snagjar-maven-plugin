@@ -2,7 +2,7 @@ package net.adamcin.maven.snagjar
 
 import java.io.{InputStream, FileFilter, File}
 import java.util.jar.{JarFile, JarEntry}
-import scalax.io.{Codec, Resource, CloseAction}
+import scalax.io.{Resource, CloseAction}
 import java.util.Properties
 import collection.JavaConversions
 import org.codehaus.plexus.util.SelectorUtils
