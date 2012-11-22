@@ -164,6 +164,7 @@ object SnagSession {
 
     extractedMetas.filterNot((meta: (GAV, File)) => allDeps.contains(meta._1)) match {
       case (gav, pom) :: Nil => new Snaggable(session, gav, file, pom)
+      case _ => null
     }
   }
 
