@@ -12,7 +12,7 @@ import org.apache.maven.model.{Dependency, Model}
 import java.util
 
 /**
- *
+ * SnagSession implementation
  * @version $Id: SnagSession.java$
  * @author madamcin
  */
@@ -153,6 +153,7 @@ object SnagSession {
           Resource.fromFile(pom).doCopyFrom(Resource.fromInputStream(opener(pomEntry)))
           (meta, pom)
         }
+        case _ => null
       }
     }).toList
 

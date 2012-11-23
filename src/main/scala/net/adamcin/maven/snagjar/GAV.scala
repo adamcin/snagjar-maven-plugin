@@ -1,8 +1,7 @@
 package net.adamcin.maven.snagjar
 
-
 /**
- *
+ * TODO Create subtypes to indicate confidence and/or completeness of GAV information
  * @version $Id: GAV.java$
  * @author madamcin
  */

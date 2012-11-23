@@ -4,6 +4,7 @@ import java.io.File
 
 /**
  *
+ *
  * @version $Id: Snaggable.java$
  * @author madamcin
  */

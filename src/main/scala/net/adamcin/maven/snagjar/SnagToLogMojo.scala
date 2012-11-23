@@ -4,7 +4,7 @@ import org.apache.maven.plugins.annotations.Mojo
 import java.io.File
 
 /**
- *
+ * Mojo that writes all snagged artifacts to the maven execution log
  * @version $Id: SnagToLogMojo.java$
  * @author madamcin
  */

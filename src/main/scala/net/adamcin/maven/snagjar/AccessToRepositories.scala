@@ -94,6 +94,7 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
     localRepoOption match {
       case Some(repo) =>
         getLog.info("localRepository real path: " + localRepository.getBasedir)
+      case None =>
     }
 
     val remoteRepoOption = Option(remoteRepository)
@@ -102,6 +103,7 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
       case Some(repo) =>
         getLog.info("remoteRepository id: " + repo.getId)
         getLog.info("remoteRepository url: " + repo.getUrl)
+      case None =>
     }
   }
 }
