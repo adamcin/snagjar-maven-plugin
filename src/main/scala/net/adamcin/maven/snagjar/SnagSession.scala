@@ -9,6 +9,7 @@ import org.codehaus.plexus.util.SelectorUtils
 import org.slf4j.{Logger, LoggerFactory}
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader
 import org.apache.maven.model.{Dependency, Model}
+import java.util
 
 /**
  *
@@ -184,16 +185,16 @@ object SnagSession {
     extractedMeta match {
       case (gav: GAV, pom: File) => {
 
-        val model = Resource.fromFile(pom).inputStream acquireAndGet { applyReader(modelReader)_ }
+        val modelIn = Resource.fromFile(pom).inputStream acquireFor { applyReader(modelReader)_ }
 
-        val deps = Option(model.getDependencies) match {
-          case Some(deps) =>
+        val deps = modelIn match {
+          case Right(model) =>
 
-            val depIt = JavaConversions.collectionAsScalaIterable(deps)
+            val depIt = JavaConversions.collectionAsScalaIterable(Option(model.getDependencies).getOrElse(new util.ArrayList[Dependency]))
 
             depIt.map { dep => GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion) }.toList
 
-          case None => List.empty[GAV]
+          case Left(exs) => List.empty[GAV] // TODO: Handle exceptions
         }
 
         (gav, pom, deps) // return triple
