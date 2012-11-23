@@ -43,17 +43,27 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
 
   def execute() {
     if (skip) {
+      // skip mojo execution if configured to do so
       getLog.info("Skipping...")
+
     } else {
+      // create the session
       val session = new SnagSession(filter, indexFile, snagFile, recursive)
+
       try {
+        // call the mojo's begin method
         begin()
-        session.findArtifacts.foreach((artifact: Snaggable) => {
-          snagArtifact(artifact)
-        })
+
+        // iterate over all the snaggable artifacts and call the snagArtifact implementation on each
+        session.findArtifacts foreach { snagArtifact }
+
+        // call the mojo's end method
         end()
+
       } finally {
+        // close the session to clean up all temporary filesystem resources
         session.close()
+
       }
     }
   }

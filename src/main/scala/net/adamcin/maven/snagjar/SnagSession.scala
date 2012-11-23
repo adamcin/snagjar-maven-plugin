@@ -32,7 +32,7 @@ class SnagSession(val filter: String,
 
   def deleteRecursively(file: File) {
     if (file.isDirectory) {
-      file.listFiles().foreach(deleteRecursively(_))
+      file.listFiles() foreach { deleteRecursively }
     }
     file.delete()
   }
@@ -51,7 +51,7 @@ class SnagSession(val filter: String,
   }
 
   def findArtifacts: Stream[Snaggable] = Option(snagFile) match {
-    case Some(file) => streamFromFile(file).filter((s: Snaggable) => filterGav(s.gav)).filter(filterTeeIndex(_))
+    case Some(file) => streamFromFile(file).filter { s => filterGav(s.gav) }.filter { filterTeeIndex }
     case None => Stream.empty[Snaggable]
   }
 
@@ -114,7 +114,7 @@ object SnagSession {
       }
   }
 
-  def jarEntryOpener(jar: JarFile) = (entry: JarEntry) => jar.getInputStream(entry)
+  def jarEntryOpener(jar: JarFile)(entry: JarEntry) = jar.getInputStream(entry)
 
   val readGAV = (stream: (InputStream)) => {
     val props = new Properties()
@@ -125,8 +125,8 @@ object SnagSession {
       Option(props.getProperty(PROP_ARTIFACT_ID)),
       Option(props.getProperty(PROP_VERSION))) match {
 
-      case (Some(groupId), Some(artifactId), Some(version)) =>
-        GAV(groupId, artifactId, version)
+      case (Some(groupId), Some(artifactId), Some(version)) => GAV(groupId, artifactId, version)
+      case _ => null
     }
   }
 
@@ -135,7 +135,7 @@ object SnagSession {
 
   def extract(file: File, session: SnagSession): Snaggable = {
     val jar = new JarFile(file)
-    val opener = jarEntryOpener(jar)
+    val opener = jarEntryOpener(jar)_
 
     val embeddedMetas =
       JavaConversions.enumerationAsScalaIterator(jar.entries()).filter(metaFilter)
@@ -157,12 +157,22 @@ object SnagSession {
 
     // partial function application FTW!!!
     val extractor = extractDependencies(new MavenXpp3Reader)_
-    val allDeps: Set[GAV] = extractedMetas.filter((m: (GAV, File)) => m match {
-      case (gav: GAV, pom: File) => true
-      case _ => false
-    }).map(extractor).foldLeft(List.empty[GAV])((list, triple) => triple._3 ::: list).toSet
 
-    extractedMetas.filterNot((meta: (GAV, File)) => allDeps.contains(meta._1)) match {
+    val allDeps: Set[GAV] = extractedMetas.filter {
+
+      _ match {
+        case (gav: GAV, pom: File) => true
+        case _ => false
+      }
+
+    }.map(extractor).foldLeft(List.empty[GAV]) {
+
+      // fold left to build a combined set of all dependencies' GAVs
+      (list, triple) => triple._3 ::: list
+
+    }.toSet
+
+    extractedMetas.filterNot { meta: (GAV, File) => allDeps contains meta._1 } match {
       case (gav, pom) :: Nil => new Snaggable(session, gav, file, pom)
       case _ => null
     }
@@ -170,20 +180,25 @@ object SnagSession {
 
   def applyReader(modelReader: MavenXpp3Reader)(in: InputStream): Model = modelReader.read(in)
 
-  def extractDependencies(modelReader: MavenXpp3Reader)(extractedMeta: (GAV, File)): (GAV, File, List[GAV]) = {
+  def extractDependencies(modelReader: MavenXpp3Reader)(extractedMeta: (GAV, File)): (GAV, File, List[GAV]) =
     extractedMeta match {
       case (gav: GAV, pom: File) => {
-        val model = Resource.fromFile(pom).inputStream.acquireAndGet(applyReader(modelReader)_)
+
+        val model = Resource.fromFile(pom).inputStream acquireAndGet { applyReader(modelReader)_ }
+
         val deps = Option(model.getDependencies) match {
           case Some(deps) =>
-            JavaConversions.collectionAsScalaIterable(deps).map((dep: Dependency) => {
-              GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion)
-            }).toList
-          case _ => List.empty[GAV]
+
+            val depIt = JavaConversions.collectionAsScalaIterable(deps)
+
+            depIt.map { dep => GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion) }.toList
+
+          case None => List.empty[GAV]
         }
+
         (gav, pom, deps) // return triple
       }
+      case _ => null
     }
-  }
 
 }

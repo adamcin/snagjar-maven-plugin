@@ -3,12 +3,13 @@ package net.adamcin.maven.snagjar
 import org.apache.maven.plugins.annotations.{Parameter, Mojo}
 import java.io.File
 import org.apache.maven.model.{Dependency, DependencyManagement, Model}
-import collection.JavaConversions
+import collection.{mutable, JavaConversions}
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
+import collection.immutable.TreeSet
 
 /**
- *
+ * Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file
  * @version $Id: SnagToDepsMojo.java$
  * @author madamcin
  */
@@ -18,49 +19,59 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
+
+  /**
+   * Write resulting dependencyManagement section to this path
+   */
   @Parameter(property = "depsFile", defaultValue = "deps.xml")
   var depsFile: File = null
 
+  /**
+   * Set the 'scope' element for all the snagged dependencies to this value
+   */
   @Parameter(property = "scope")
   var scope: String = null
 
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
-  val model = new Model
-  val dm = new DependencyManagement
-  val modelWriter = new MavenXpp3Writer
+
+  var gavs = TreeSet.empty[GAV]
 
   override def begin() {
     super.begin()
-    model.setDependencyManagement(dm)
     if (depsFile.exists()) { depsFile.delete() }
   }
 
   def snagArtifact(artifact: Snaggable) {
-    val dep = new Dependency
-    dep.setGroupId(artifact.gav.groupId)
-    dep.setArtifactId(artifact.gav.artifactId)
-    dep.setVersion(artifact.gav.version)
-    dep.setScope(scope)
-    dm.addDependency(dep)
+    gavs += artifact.gav
   }
 
   override def end() {
     super.end()
 
-    val sorted = JavaConversions.collectionAsScalaIterable(dm.getDependencies).toList.sortWith(depLtDep)
-    dm.setDependencies(JavaConversions.seqAsJavaList(sorted))
+    val model = new Model
+    val dm = new DependencyManagement
+    val modelWriter = new MavenXpp3Writer
+
+    model.setDependencyManagement(dm)
+
+    gavs foreach { gav => dm.addDependency(gavToDep(gav)) }
 
     getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
     Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
   }
 
-  def depLtDep(left: Dependency, right: Dependency): Boolean =
-    left.getGroupId < right.getGroupId || left.getArtifactId < right.getArtifactId ||
-      left.getVersion < right.getVersion
-
+  def gavToDep(gav: GAV): Dependency = {
+    val dep = new Dependency
+    dep.setGroupId(gav.groupId)
+    dep.setArtifactId(gav.artifactId)
+    dep.setVersion(gav.version)
+    dep.setType("jar")
+    dep.setScope(scope)
+    dep
+  }
 
   override def printParams() {
     super.printParams()

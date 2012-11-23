@@ -14,8 +14,6 @@ class Snaggable(val session: SnagSession,
 
 }
 
-
-
 object Snaggable {
   def apply(file: File, session: SnagSession): Snaggable = SnagSession.extract(file, session)
 }
