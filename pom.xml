@@ -227,14 +227,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-compiler-bundle</artifactId>
-            <version>${scala.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.9.2</artifactId>
+			<artifactId>scalatest_${scala.version}</artifactId>
             <version>1.8</version>
             <scope>test</scope>
         </dependency>
