@@ -42,7 +42,7 @@ class SnagToLogMojo extends AbstractSnagJarMojo {
     context match {
       case ctx: ToLogContext => {
         getLog.info("------------------------------------------------------------------------")
-        getLog.info("# Artifacts: " + context)
+        getLog.info("# Artifacts: " + ctx.artifactCount)
       }
       case _ =>
     }
