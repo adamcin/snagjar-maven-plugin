@@ -20,5 +20,5 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
   def snagArtifact(context: SnagContext, artifact: Snaggable) = context
 
   // override this method to perform logic after all artifacts have been snagged
-  def end(context: ToRemoteContext) {}
+  def end(context: SnagContext) {}
 }

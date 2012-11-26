@@ -45,11 +45,11 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
     new ToDepsContext(TreeSet.empty[GAV])
   }
 
-  def snagArtifact(context: ToDepsContext, artifact: Snaggable) = {
+  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
     new ToDepsContext(context.gavs + artifact.gav)
   }
 
-  override def end(context: ToDepsContext) {
+  override def end(context: SnagContext) {
     val model = new Model
     val dm = new DependencyManagement
     val modelWriter = new MavenXpp3Writer

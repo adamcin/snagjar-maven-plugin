@@ -13,20 +13,17 @@ class ToLocalContext
 class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
   type SnagContext = ToLocalContext
 
-  /*
-  def snagArtifact(context: SnagContext, artifact: Snaggable) {
-    getLog.info(artifact.gav.toString)
-  }
-  */
-
   // override this method to perform some setup logic
   def begin() = new ToLocalContext
 
   // override this method to perform logic on each snagged artifact
-  def snagArtifact(context: ToLocalContext, artifact: Snaggable) = context
+  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
+    getLog.info(artifact.gav.toString)
+    context
+  }
 
   // override this method to perform logic after all artifacts have been snagged
-  def end(context: ToLocalContext) { }
+  def end(context: SnagContext) { }
 
   override def printParams() {
     super.printParams()
