@@ -11,26 +11,41 @@ import java.io.File
 @Mojo(name = "to-log", requiresProject = false)
 class SnagToLogMojo extends AbstractSnagJarMojo {
 
-  var artifactCount = 0
+  class ToLogContext(prevContext: ToLogContext) extends SnagContext {
+    val artifactCount: Int = Option(prevContext) match {
+      case Some(context) => context.artifactCount + 1
+      case None => 0
+    }
+  }
 
-  override def begin() {
+  override def begin(): SnagContext = {
     super.begin()
     getLog.info("------------------------------------------------------------------------")
     getLog.info("Snagging Artifacts to Log...")
     getLog.info("------------------------------------------------------------------------")
+    new ToLogContext(null)
   }
 
-  def snagArtifact(artifact: Snaggable) {
+  override def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext = {
     getLog.info(artifact.gav.toString)
     getLog.info("\t\t=> " + toRelative(artifact.session.snagFile, artifact.jar.getAbsolutePath))
     getLog.info("")
-    artifactCount += 1
+
+    context match {
+      case ctx: ToLogContext => new ToLogContext(ctx)
+      case _ => context
+    }
   }
 
-  override def end() {
-    super.end()
-    getLog.info("------------------------------------------------------------------------")
-    getLog.info("# Artifacts: " + artifactCount)
+  override def end(context: SnagContext) {
+    super.end(context)
+    context match {
+      case ctx: ToLogContext => {
+        getLog.info("------------------------------------------------------------------------")
+        getLog.info("# Artifacts: " + context)
+      }
+      case _ =>
+    }
   }
 
   override def printParams() {

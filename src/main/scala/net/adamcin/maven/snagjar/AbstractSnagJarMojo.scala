@@ -15,56 +15,64 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
+  final val defaultFilter = "*"
+  final val defaultIndexFile = "snagIndex.txt"
+  final val defaultSnagFile = "."
 
   /**
    * applies a standard GAV (groupId:artifactId:version) filter to the snagged artifacts
    * (format: *:*:*)
    * @since 1.0
    */
-  @Parameter(property = "filter", defaultValue = "*")
-  var filter: String = null
+  @Parameter(property = "filter", defaultValue = defaultFilter)
+  val filter = defaultFilter
 
   /**
    * specify the location of the generated index file, useful for subsequent
    * shell processing of snagged artifacts
    * @since 1.0
    */
-  @Parameter(property = "indexFile", defaultValue = "snagIndex.txt")
-  var indexFile: File = null
+  @Parameter(property = "indexFile", defaultValue = defaultIndexFile)
+  val indexFile = new File(defaultIndexFile)
 
   /**
    * jar or directory containing jars to snag
    * @since 1.0
    */
-  @Parameter(property = "snagFile", defaultValue = ".")
-  var snagFile: File = null
+  @Parameter(property = "snagFile", defaultValue = defaultSnagFile)
+  val snagFile = new File(defaultSnagFile)
 
   /**
    * set to true to skip mojo execution altogether
    * @since 1.0
    */
   @Parameter(property = "skip")
-  var skip = false
+  val skip = false
 
   /**
    * set to true to recursively scan directories for jar files
    * @since 1.0
    */
   @Parameter(property = "recursive")
-  var recursive = false
+  val recursive = false
 
   // -----------------------------------------------
   // Methods to Override
   // -----------------------------------------------
 
+  /**
+   * base type for subtype mojo function application
+   */
+  class SnagContext
+
   // override this method to perform some setup logic
-  def begin() {}
+  def begin(): SnagContext = new SnagContext
 
   // override this method to perform logic on each snagged artifact
-  def snagArtifact(artifact: Snaggable)
+  def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext = context
 
   // override this method to perform logic after all artifacts have been snagged
-  def end() {}
+  def end(context: SnagContext) {}
 
   // -----------------------------------------------
   // Members
@@ -84,19 +92,16 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
       val session = new SnagSession(filter, indexFile, snagFile, recursive)
 
       try {
-        // call the mojo's begin method
-        begin()
-
-        // iterate over all the snaggable artifacts and call the snagArtifact implementation on each
-        session.findArtifacts foreach { snagArtifact }
-
-        // call the mojo's end method
-        end()
+        // 1. foldLeft begins with begin(),
+        // 2. iterates over all the snaggable artifacts and call the snagArtifact implementation on each
+        // 3. end() is called on last returned context
+        // ...
+        // This is one hell of a purely functional one-liner.
+        end(session.findArtifacts.foldLeft (begin()) { snagArtifact })
 
       } finally {
         // close the session to clean up all temporary filesystem resources
         session.close()
-
       }
     }
   }

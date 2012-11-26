@@ -11,9 +11,11 @@ import org.apache.maven.plugins.annotations.Mojo
 class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
 
 
-  def snagArtifact(artifact: Snaggable) {
+  /*
+  def snagArtifact(context: SnagContext, artifact: Snaggable) {
     getLog.info(artifact.gav.toString)
   }
+  */
 
   override def printParams() {
     super.printParams()

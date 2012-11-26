@@ -20,28 +20,28 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
   // Injected Maven Components
   // -----------------------------------------------
   @Component
-  var settings: Settings = null
+  val settings: Settings = null
 
   @Component
-  var repositorySystem: RepositorySystem = null
+  val repositorySystem: RepositorySystem = null
 
   @Component(role = classOf[ArtifactRepositoryLayout])
-  var repositoryLayouts: java.util.Map[String, ArtifactRepositoryLayout] = null
+  val repositoryLayouts: java.util.Map[String, ArtifactRepositoryLayout] = null
 
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
   @Parameter(property = "localRepositoryPath")
-  var localRepositoryPath: File = null
+  val localRepositoryPath: File = null
 
   @Parameter(property = "url")
-  var url: String = null
+  val url: String = null
 
   @Parameter(property = "repositoryId")
-  var repositoryId: String = null
+  val repositoryId: String = null
 
   @Parameter(property = "repositoryLayout")
-  var repositoryLayout: String = null
+  val repositoryLayout: String = null
 
   // -----------------------------------------------
   // Members
