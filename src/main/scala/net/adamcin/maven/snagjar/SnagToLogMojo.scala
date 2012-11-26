@@ -11,19 +11,14 @@ import java.io.File
 @Mojo(name = "to-log", requiresProject = false)
 class SnagToLogMojo extends AbstractSnagJarMojo {
 
-  class ToLogContext(prevContext: ToLogContext) extends SnagContext {
-    val artifactCount: Int = Option(prevContext) match {
-      case Some(context) => context.artifactCount + 1
-      case None => 0
-    }
-  }
+  class ToLogContext(val artifactCount: Int) extends SnagContext
 
   override def begin(): SnagContext = {
     super.begin()
     getLog.info("------------------------------------------------------------------------")
     getLog.info("Snagging Artifacts to Log...")
     getLog.info("------------------------------------------------------------------------")
-    new ToLogContext(null)
+    new ToLogContext(0)
   }
 
   override def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext = {
@@ -32,7 +27,7 @@ class SnagToLogMojo extends AbstractSnagJarMojo {
     getLog.info("")
 
     context match {
-      case ctx: ToLogContext => new ToLogContext(ctx)
+      case ctx: ToLogContext => new ToLogContext(ctx.artifactCount + 1)
       case _ => context
     }
   }
