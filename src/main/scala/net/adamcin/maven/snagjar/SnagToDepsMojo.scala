@@ -8,6 +8,8 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
 import collection.immutable.TreeSet
 
+class ToDepsContext(val gavs: TreeSet[GAV])
+
 /**
  * Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file
  * @version $Id: SnagToDepsMojo.java$
@@ -15,6 +17,7 @@ import collection.immutable.TreeSet
  */
 @Mojo(name = "to-deps", requiresProject = false)
 class SnagToDepsMojo extends AbstractSnagJarMojo {
+  type SnagContext = ToDepsContext
 
   // -----------------------------------------------
   // Maven Parameters
@@ -36,39 +39,28 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
-  class ToDepsContext(val gavs: TreeSet[GAV]) extends SnagContext
 
-  override def begin(): SnagContext = {
-    super.begin()
+  def begin() = {
     if (depsFile.exists()) { depsFile.delete() }
     new ToDepsContext(TreeSet.empty[GAV])
   }
 
-  override def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext = {
-    context match {
-      case ctx: ToDepsContext => new ToDepsContext(ctx.gavs + artifact.gav)
-      case _ => context
-    }
+  def snagArtifact(context: ToDepsContext, artifact: Snaggable) = {
+    new ToDepsContext(context.gavs + artifact.gav)
   }
 
-  override def end(context: SnagContext) {
-    super.end(context)
+  override def end(context: ToDepsContext) {
+    val model = new Model
+    val dm = new DependencyManagement
+    val modelWriter = new MavenXpp3Writer
 
-    context match {
-      case ctx: ToDepsContext => {
-        val model = new Model
-        val dm = new DependencyManagement
-        val modelWriter = new MavenXpp3Writer
+    model.setDependencyManagement(dm)
 
-        model.setDependencyManagement(dm)
+    context.gavs foreach { gav => dm.addDependency(gavToDep(gav)) }
 
-        ctx.gavs foreach { gav => dm.addDependency(gavToDep(gav)) }
+    getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
-        getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
-
-        Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
-      }
-    }
+    Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
   }
 
   def gavToDep(gav: GAV): Dependency = {

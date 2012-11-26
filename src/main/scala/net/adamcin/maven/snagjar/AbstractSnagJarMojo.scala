@@ -12,6 +12,8 @@ import java.io.File
  */
 abstract class AbstractSnagJarMojo extends AbstractMojo {
 
+  type SnagContext
+
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
@@ -60,19 +62,14 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   // Methods to Override
   // -----------------------------------------------
 
-  /**
-   * base type for subtype mojo function application
-   */
-  class SnagContext
-
   // override this method to perform some setup logic
-  def begin(): SnagContext = new SnagContext
+  def begin(): SnagContext
 
   // override this method to perform logic on each snagged artifact
-  def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext = context
+  def snagArtifact(context: SnagContext, artifact: Snaggable): SnagContext
 
   // override this method to perform logic after all artifacts have been snagged
-  def end(context: SnagContext) {}
+  def end(context: SnagContext)
 
   // -----------------------------------------------
   // Members
