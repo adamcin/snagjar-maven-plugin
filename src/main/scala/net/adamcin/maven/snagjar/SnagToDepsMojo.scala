@@ -15,8 +15,7 @@ class ToDepsContext(val gavs: TreeSet[GAV])
  * @author madamcin
  */
 @Mojo(name = "to-deps", requiresProject = false)
-class SnagToDepsMojo extends AbstractSnagJarMojo {
-  type SnagContext = ToDepsContext
+class SnagToDepsMojo extends AbstractSnagJarMojo[ToDepsContext] {
 
   // -----------------------------------------------
   // Maven Parameters
@@ -38,17 +37,16 @@ class SnagToDepsMojo extends AbstractSnagJarMojo {
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
-
   def begin() = {
     if (depsFile.exists()) { depsFile.delete() }
     new ToDepsContext(TreeSet.empty[GAV])
   }
 
-  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
+  def snagArtifact(context: ToDepsContext, artifact: Snaggable) = {
     new ToDepsContext(context.gavs + artifact.gav)
   }
 
-  override def end(context: SnagContext) {
+  def end(context: ToDepsContext) {
     val model = new Model
     val dm = new DependencyManagement
     val modelWriter = new MavenXpp3Writer

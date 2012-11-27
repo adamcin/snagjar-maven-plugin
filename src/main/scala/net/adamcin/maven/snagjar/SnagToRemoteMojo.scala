@@ -11,7 +11,7 @@ class ToRemoteContext(val deployedGAVs: TreeSet[GAV])
  * @author madamcin
  */
 @Mojo(name = "to-remote", requiresProject = false)
-class SnagToRemoteMojo extends AbstractSnagJarMojo with DeploysToRemoteRepository {
+class SnagToRemoteMojo extends AbstractSnagJarMojo[ToRemoteContext] with DeploysToRemoteRepository {
 
   val listener = new ArtifactTransferListener {
     def transferCompleted(p1: ArtifactTransferEvent) {
@@ -33,13 +33,15 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with DeploysToRemoteRepositor
     }
   }
 
-  type SnagContext = ToRemoteContext
+  // -----------------------------------------------
+  // Members
+  // -----------------------------------------------
 
   // override this method to perform some setup logic
   def begin() = new ToRemoteContext(TreeSet.empty[GAV])
 
   // override this method to perform logic on each snagged artifact
-  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
+  def snagArtifact(context: ToRemoteContext, artifact: Snaggable) = {
 
     if (context.deployedGAVs.contains(artifact.gav)) {
       getLog.info("[to-remote] artifact already deployed: " + artifact.gav.toString)
@@ -54,5 +56,5 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with DeploysToRemoteRepositor
   }
 
   // override this method to perform logic after all artifacts have been snagged
-  def end(context: SnagContext) {}
+  def end(context: ToRemoteContext) {}
 }

@@ -10,7 +10,7 @@ class ToLocalContext(val installedGAVs: Set[GAV])
  * @author madamcin
  */
 @Mojo(name = "to-local", requiresProject = false)
-class SnagToLocalMojo extends AbstractSnagJarMojo with InstallsToLocalRepository {
+class SnagToLocalMojo extends AbstractSnagJarMojo[ToLocalContext] with InstallsToLocalRepository {
 
   val listener = new ArtifactTransferListener {
     def transferCompleted(p1: ArtifactTransferEvent) {
@@ -35,13 +35,12 @@ class SnagToLocalMojo extends AbstractSnagJarMojo with InstallsToLocalRepository
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
-  type SnagContext = ToLocalContext
 
   // override this method to perform some setup logic
   def begin() = new ToLocalContext(Set.empty[GAV])
 
   // override this method to perform logic on each snagged artifact
-  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
+  def snagArtifact(context: ToLocalContext, artifact: Snaggable) = {
     if (context.installedGAVs.contains(artifact.gav)) {
       getLog.info("[to-local] artifact already installed: " + artifact.gav.toString)
       context
@@ -55,7 +54,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo with InstallsToLocalRepository
   }
 
   // override this method to perform logic after all artifacts have been snagged
-  def end(context: SnagContext) { }
+  def end(context: ToLocalContext) { }
 
 
   override def printParams() {

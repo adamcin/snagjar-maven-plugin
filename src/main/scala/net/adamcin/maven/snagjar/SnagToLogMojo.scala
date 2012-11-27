@@ -11,8 +11,11 @@ class ToLogContext(val artifactCount: Int)
  * @author madamcin
  */
 @Mojo(name = "to-log", requiresProject = false)
-class SnagToLogMojo extends AbstractSnagJarMojo {
-  type SnagContext = ToLogContext
+class SnagToLogMojo extends AbstractSnagJarMojo[ToLogContext] {
+
+  // -----------------------------------------------
+  // Members
+  // -----------------------------------------------
 
   def begin() = {
     getLog.info("------------------------------------------------------------------------")
@@ -21,14 +24,14 @@ class SnagToLogMojo extends AbstractSnagJarMojo {
     new ToLogContext(0)
   }
 
-  def snagArtifact(context: SnagContext, artifact: Snaggable) = {
+  def snagArtifact(context: ToLogContext, artifact: Snaggable) = {
     getLog.info(artifact.gav.toString)
     getLog.info("\t\t=> " + toRelative(artifact.session.snagFile, artifact.jar.getAbsolutePath))
     getLog.info("")
     new ToLogContext(context.artifactCount + 1)
   }
 
-  def end(context: SnagContext) {
+  def end(context: ToLogContext) {
     getLog.info("------------------------------------------------------------------------")
     getLog.info("# Artifacts: " + context.artifactCount)
   }

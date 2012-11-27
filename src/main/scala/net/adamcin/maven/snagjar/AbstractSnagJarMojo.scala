@@ -10,7 +10,7 @@ import java.io.File
  * @version $Id: AbstractSnagJarMojo.java$
  * @author madamcin
  */
-abstract class AbstractSnagJarMojo extends AbstractMojo {
+abstract class AbstractSnagJarMojo[SnagContext] extends AbstractMojo with PrintsParams {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
@@ -55,13 +55,9 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   @Parameter(property = "recursive")
   val recursive = false
 
-  @Parameter(property = "debug")
-  val debug = false
-
   // -----------------------------------------------
   // Methods to Override
   // -----------------------------------------------
-  type SnagContext
 
   // override this method to perform some setup logic
   def begin(): SnagContext
@@ -79,10 +75,10 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   /**
    * core mojo method. do not override.
    */
-  final def execute() {
-    if (debug) {
-      printParams()
-    } else if (skip) {
+  final override def execute() {
+    super.execute()
+
+    if (skip) {
       // skip mojo execution if configured to do so
       getLog.info("Skipping...")
 
@@ -108,7 +104,7 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   /**
    * print injected maven component and parameter values
    */
-  def printParams() {
+  override def printParams() {
     getLog.info("filter: " + filter)
     getLog.info("indexFile: " + indexFile.getAbsolutePath)
     getLog.info("snagFile: " + snagFile)

@@ -17,7 +17,7 @@ import org.apache.maven.artifact.Artifact
  * @version $Id: AccessToRepositories.java$
  * @author madamcin
  */
-trait AccessToRepositories extends AbstractSnagJarMojo {
+trait AccessToRepositories extends PrintsParams {
 
   // -----------------------------------------------
   // Injected Maven Components
@@ -34,6 +34,11 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
+
+  /**
+   * Specify the repository layout to use for local and remote repositories
+   * @since 1.0
+   */
   @Parameter(property = "repositoryLayout")
   val repositoryLayout: String = null
 
