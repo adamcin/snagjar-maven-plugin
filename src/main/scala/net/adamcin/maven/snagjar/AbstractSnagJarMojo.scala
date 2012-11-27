@@ -11,9 +11,6 @@ import java.io.File
  * @author madamcin
  */
 abstract class AbstractSnagJarMojo extends AbstractMojo {
-
-  type SnagContext
-
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
@@ -58,9 +55,13 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
   @Parameter(property = "recursive")
   val recursive = false
 
+  @Parameter(property = "debug")
+  val debug = false
+
   // -----------------------------------------------
   // Methods to Override
   // -----------------------------------------------
+  type SnagContext
 
   // override this method to perform some setup logic
   def begin(): SnagContext
@@ -79,8 +80,9 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
    * core mojo method. do not override.
    */
   final def execute() {
-    if (skip) {
-
+    if (debug) {
+      printParams()
+    } else if (skip) {
       // skip mojo execution if configured to do so
       getLog.info("Skipping...")
 
@@ -94,7 +96,7 @@ abstract class AbstractSnagJarMojo extends AbstractMojo {
         // 3. end() is called on last returned context
         // ...
         // This is one hell of a purely functional one-liner.
-        end(session.findArtifacts.foldLeft (begin()) { snagArtifact })
+        end( session.findArtifacts.foldLeft (begin()) { snagArtifact } )
 
       } finally {
         // close the session to clean up all temporary filesystem resources

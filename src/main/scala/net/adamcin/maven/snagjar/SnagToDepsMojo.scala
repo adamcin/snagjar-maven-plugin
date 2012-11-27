@@ -3,7 +3,6 @@ package net.adamcin.maven.snagjar
 import org.apache.maven.plugins.annotations.{Parameter, Mojo}
 import java.io.File
 import org.apache.maven.model.{Dependency, DependencyManagement, Model}
-import collection.{mutable, JavaConversions}
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
 import collection.immutable.TreeSet

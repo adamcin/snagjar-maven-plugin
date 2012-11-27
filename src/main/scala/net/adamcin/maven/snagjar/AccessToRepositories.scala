@@ -8,6 +8,9 @@ import collection.JavaConversions
 import java.io.File
 import org.apache.maven.settings.Settings
 import scala.Option
+import org.apache.maven.project.artifact.ProjectArtifactMetadata
+import org.apache.maven.artifact.metadata.ArtifactMetadata
+import org.apache.maven.artifact.Artifact
 
 /**
  *
@@ -20,13 +23,13 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
   // Injected Maven Components
   // -----------------------------------------------
   @Component
-  val settings: Settings = null
+  var settings: Settings = null
 
   @Component
-  val repositorySystem: RepositorySystem = null
+  var repositorySystem: RepositorySystem = null
 
   @Component(role = classOf[ArtifactRepositoryLayout])
-  val repositoryLayouts: java.util.Map[String, ArtifactRepositoryLayout] = null
+  var repositoryLayouts: java.util.Map[String, ArtifactRepositoryLayout] = null
 
   // -----------------------------------------------
   // Maven Parameters
@@ -74,6 +77,11 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
       case (_, _) =>
         repositorySystem.createDefaultRemoteRepository()
     }
+
+  def snaggableToArtifact(s: Snaggable): (Artifact, ArtifactMetadata) = {
+    val a = repositorySystem.createArtifact(s.gav.groupId, s.gav.artifactId, s.gav.version, "jar")
+    (a, new ProjectArtifactMetadata(a, s.pom))
+  }
 
   override def printParams() {
     super.printParams()
