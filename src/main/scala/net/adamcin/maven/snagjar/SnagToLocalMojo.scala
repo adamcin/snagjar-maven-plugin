@@ -6,7 +6,6 @@ import org.apache.maven.repository.{ArtifactTransferEvent, ArtifactTransferListe
 class ToLocalContext(val installedGAVs: Set[GAV])
 
 /**
- * TODO Implement
  * @version $Id: SnagToLocalMojo.java$
  * @author madamcin
  */

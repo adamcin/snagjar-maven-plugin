@@ -7,7 +7,6 @@ import collection.immutable.TreeSet
 class ToRemoteContext(val deployedGAVs: TreeSet[GAV])
 
 /**
- * TODO Implement
  * @version $Id: SnagToRemoteMojo.java$
  * @author madamcin
  */
