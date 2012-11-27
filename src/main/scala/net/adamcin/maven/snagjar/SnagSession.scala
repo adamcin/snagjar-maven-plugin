@@ -3,13 +3,12 @@ package net.adamcin.maven.snagjar
 import java.io.{InputStream, FileFilter, File}
 import java.util.jar.{JarFile, JarEntry}
 import scalax.io.{Resource, CloseAction}
-import java.util.Properties
+import java.util.{Collections, Properties}
 import collection.JavaConversions
 import org.codehaus.plexus.util.SelectorUtils
 import org.slf4j.{Logger, LoggerFactory}
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader
 import org.apache.maven.model.{Dependency, Model}
-import java.util
 
 /**
  * SnagSession implementation
@@ -191,7 +190,7 @@ object SnagSession {
         val deps = modelIn match {
           case Right(model) =>
 
-            val depIt = JavaConversions.collectionAsScalaIterable(Option(model.getDependencies).getOrElse(new util.ArrayList[Dependency]))
+            val depIt = JavaConversions.collectionAsScalaIterable(Option(model.getDependencies).getOrElse(Collections.emptyList[Dependency]))
 
             depIt.map { dep => GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion) }.toList
 
