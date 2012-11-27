@@ -21,7 +21,7 @@ To enable shorthand execution of the plugin from the command-line, you must add 
 Usage
 =====
 
-The snagjar-maven-plugin provides 4 goals:
+The snagjar-maven-plugin provides 5 goals:
 
 - _to-log_: Prints the details of snagged artifacts to the maven log
 - _to-deps_: Generates a maven pom file containing a sorted list of unique captured artifacts as dependencies in a dependencyManagement element
