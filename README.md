@@ -41,5 +41,8 @@ To recursively scan a CQ installation directory for bundles and deploy them to a
 
     mvn snagjar:to-remote -DsnagFile=crx-quickstart -Drecursive=true -DrepositoryId=thirdparty -Durl=http://example.corp.com/repository/thirdparty/content
     
+To recursively scan a CQ installation directory and generate a dependencyManagement section that only includes proprietary libraries:
 
+    mvn snagjar:to-deps -Dfilter=com.* -Drecursive=true -FsnagFile=crx-quickstart -DdepsFile=C:/workspace/cq55platform/pom.xml
+    
     
