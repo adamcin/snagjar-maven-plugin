@@ -29,6 +29,10 @@ The snagjar-maven-plugin provides 5 goals:
 - _to-remote_: Deploys snagged artifacts to a remote maven repository
 - _help_: Prints a list of the plugin's goals and available parameters for each, though without javadoc-based documentation because the Mojos are written in Scala
 
+To install all the jars in the current directory into the local maven repository:
+
+    mvn snagjar:to-local
+
 To recursively scan the current directory for artifacts and generate a dependencyManagement section with all dependencies defined as having _provided_ scope:
 
     mvn snagjar:to-deps -Drecursive=true -Dscope=provided
