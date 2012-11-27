@@ -20,7 +20,7 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
     }
 
     def transferInitiated(p1: ArtifactTransferEvent) {
-      getLog.info("[to-remote] transfer initiated: " + p1)
+      getLog.debug("[to-remote] transfer initiated: " + p1)
     }
 
     def isShowChecksumEvents = false
@@ -30,7 +30,7 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
     def setShowChecksumEvents(p1: Boolean) {}
 
     def transferStarted(p1: ArtifactTransferEvent) {
-      getLog.info("[to-remote] transfer started: " + p1.getResource)
+      getLog.debug("[to-remote] transfer started: " + p1.getResource)
     }
   }
 

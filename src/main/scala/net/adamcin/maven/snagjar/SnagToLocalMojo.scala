@@ -19,7 +19,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
     }
 
     def transferInitiated(p1: ArtifactTransferEvent) {
-      getLog.info("[to-local] transfer initiated: " + p1)
+      getLog.debug("[to-local] transfer initiated: " + p1)
     }
 
     def isShowChecksumEvents = false
@@ -29,7 +29,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
     def setShowChecksumEvents(p1: Boolean) {}
 
     def transferStarted(p1: ArtifactTransferEvent) {
-      getLog.info("[to-local] transfer started: " + p1.getResource)
+      getLog.debug("[to-local] transfer started: " + p1.getResource)
     }
   }
 
