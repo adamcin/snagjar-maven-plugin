@@ -12,7 +12,7 @@ class ToRemoteContext(val deployedGAVs: TreeSet[GAV])
  * @author madamcin
  */
 @Mojo(name = "to-remote", requiresProject = false)
-class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
+class SnagToRemoteMojo extends AbstractSnagJarMojo with DeploysToRemoteRepository {
 
   val listener = new ArtifactTransferListener {
     def transferCompleted(p1: ArtifactTransferEvent) {
@@ -34,7 +34,6 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
     }
   }
 
-
   type SnagContext = ToRemoteContext
 
   // override this method to perform some setup logic
@@ -49,19 +48,7 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo with AccessToRepositories {
     } else {
       getLog.info(artifact.gav.toString)
 
-      val (m2artifact, m2meta) = snaggableToArtifact(artifact)
-
-      repositorySystem.publish(
-        remoteRepository,
-        artifact.jar,
-        remoteRepository.getLayout.pathOf(m2artifact),
-        listener)
-
-      repositorySystem.publish(
-        remoteRepository,
-        artifact.pom,
-        remoteRepository.getLayout.pathOfRemoteRepositoryMetadata(m2meta),
-        listener)
+      deploy(artifact, listener)
 
       new ToRemoteContext(context.deployedGAVs + artifact.gav)
     }

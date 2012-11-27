@@ -34,15 +34,6 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
-  @Parameter(property = "localRepositoryPath")
-  val localRepositoryPath: File = null
-
-  @Parameter(property = "url")
-  val url: String = null
-
-  @Parameter(property = "repositoryId")
-  val repositoryId: String = null
-
   @Parameter(property = "repositoryLayout")
   val repositoryLayout: String = null
 
@@ -62,22 +53,6 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
   // lazy evaluation occurs after dependency injection :)
   lazy val layout: ArtifactRepositoryLayout = repositoryLayouts.get(Option(repositoryLayout).getOrElse("default"))
 
-  lazy val localRepository: ArtifactRepository =
-    Option(localRepositoryPath) match {
-      case Some(path) => repositorySystem.createLocalRepository(path)
-      case None => repositorySystem.createDefaultLocalRepository()
-    }
-
-  lazy val remoteRepository: ArtifactRepository =
-    (Option(repositoryId), Option(url)) match {
-      case (Some(pId), Some(pUrl)) =>
-        repositorySystem.createArtifactRepository(pId, pUrl, layout, snapshotPolicy, releasePolicy)
-      case (None, Some(pUrl)) =>
-        repositorySystem.createArtifactRepository(null, pUrl, layout, snapshotPolicy, releasePolicy)
-      case (_, _) =>
-        repositorySystem.createDefaultRemoteRepository()
-    }
-
   def snaggableToArtifact(s: Snaggable): (Artifact, ArtifactMetadata) = {
     val a = repositorySystem.createArtifact(s.gav.groupId, s.gav.artifactId, s.gav.version, "jar")
     (a, new ProjectArtifactMetadata(a, s.pom))
@@ -92,26 +67,6 @@ trait AccessToRepositories extends AbstractSnagJarMojo {
 
     JavaConversions.mapAsScalaMap(repositoryLayouts).foreach((p: (String, ArtifactRepositoryLayout)) => getLog.info("Layout " + p._1 + " casts " + classOf[ArtifactRepositoryLayout].cast(p._2)))
 
-    getLog.info("localRepositoryPath: " + localRepositoryPath)
-    getLog.info("url: " + url)
-    getLog.info("repositoryId: " + repositoryId)
     getLog.info("repositoryLayout: " + repositoryLayout)
-
-    val localRepoOption = Option(localRepository)
-    getLog.info("localRepository is empty? " + localRepoOption.isEmpty)
-    localRepoOption match {
-      case Some(repo) =>
-        getLog.info("localRepository real path: " + localRepository.getBasedir)
-      case None =>
-    }
-
-    val remoteRepoOption = Option(remoteRepository)
-    getLog.info("remoteRepository is empty? " + remoteRepoOption.isEmpty)
-    remoteRepoOption match {
-      case Some(repo) =>
-        getLog.info("remoteRepository id: " + repo.getId)
-        getLog.info("remoteRepository url: " + repo.getUrl)
-      case None =>
-    }
   }
 }

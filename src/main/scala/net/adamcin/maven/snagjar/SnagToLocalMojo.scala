@@ -11,7 +11,7 @@ class ToLocalContext(val installedGAVs: Set[GAV])
  * @author madamcin
  */
 @Mojo(name = "to-local", requiresProject = false)
-class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
+class SnagToLocalMojo extends AbstractSnagJarMojo with InstallsToLocalRepository {
 
   val listener = new ArtifactTransferListener {
     def transferCompleted(p1: ArtifactTransferEvent) {
@@ -49,19 +49,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo with AccessToRepositories {
     } else {
       getLog.info(artifact.gav.toString)
 
-      val (m2artifact, m2meta) = snaggableToArtifact(artifact)
-
-      repositorySystem.publish(
-        localRepository,
-        artifact.jar,
-        localRepository.getLayout.pathOf(m2artifact),
-        listener)
-
-      repositorySystem.publish(
-        localRepository,
-        artifact.pom,
-        localRepository.getLayout.pathOfLocalRepositoryMetadata(m2meta, localRepository),
-        listener)
+      install(artifact, listener)
 
       new ToLocalContext(context.installedGAVs + artifact.gav)
     }
