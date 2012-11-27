@@ -11,7 +11,7 @@
             <name>Mark Adamcin</name>
             <email>adamcin@gmail.com</email>
             <roles>
-                <role>Sr. Developer</role>
+                <role>developer</role>
             </roles>
             <url>http://gplus.to/MarkAdamcin</url>
         </developer>
@@ -228,7 +228,7 @@
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
-			<artifactId>scalatest_${scala.version}</artifactId>
+            <artifactId>scalatest_${scala.version}</artifactId>
             <version>1.8</version>
             <scope>test</scope>
         </dependency>
