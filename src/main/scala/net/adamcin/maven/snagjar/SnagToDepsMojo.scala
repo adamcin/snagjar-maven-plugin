@@ -8,15 +8,13 @@ import scalax.io.Resource
 import collection.immutable.TreeSet
 import org.apache.maven.plugin.logging.Log
 
-class ToDepsContext(val gavs: TreeSet[GAV])
-
 /**
  * Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file
  * @version $Id: SnagToDepsMojo.java$
  * @author madamcin
  */
 @Mojo(name = "to-deps", requiresProject = false)
-class SnagToDepsMojo extends AbstractSnagJarMojo[ToDepsContext] {
+class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
 
   // -----------------------------------------------
   // Maven Parameters
@@ -40,21 +38,21 @@ class SnagToDepsMojo extends AbstractSnagJarMojo[ToDepsContext] {
   // -----------------------------------------------
   def begin() = {
     if (depsFile.exists()) { depsFile.delete() }
-    new ToDepsContext(TreeSet.empty[GAV])
+    TreeSet.empty[GAV]
   }
 
-  def snagArtifact(context: ToDepsContext, artifact: Snaggable) = {
-    new ToDepsContext(context.gavs + artifact.gav)
+  def snagArtifact(context: TreeSet[GAV], artifact: Snaggable) = {
+    context + artifact.gav
   }
 
-  def end(context: ToDepsContext) {
+  def end(context: TreeSet[GAV]) {
     val model = new Model
     val dm = new DependencyManagement
     val modelWriter = new MavenXpp3Writer
 
     model.setDependencyManagement(dm)
 
-    context.gavs foreach { gav => dm.addDependency(gavToDep(gav)) }
+    context foreach { gav => dm.addDependency(gavToDep(gav)) }
 
     getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
