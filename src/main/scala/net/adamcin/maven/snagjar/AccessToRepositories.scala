@@ -11,13 +11,14 @@ import scala.Option
 import org.apache.maven.project.artifact.ProjectArtifactMetadata
 import org.apache.maven.artifact.metadata.ArtifactMetadata
 import org.apache.maven.artifact.Artifact
+import org.apache.maven.plugin.logging.Log
 
 /**
  *
  * @version $Id: AccessToRepositories.java$
  * @author madamcin
  */
-trait AccessToRepositories extends PrintsParams {
+trait AccessToRepositories extends LogsParameters {
 
   // -----------------------------------------------
   // Injected Maven Components
@@ -63,15 +64,15 @@ trait AccessToRepositories extends PrintsParams {
     (a, new ProjectArtifactMetadata(a, s.pom))
   }
 
-  override def printParams() {
-    super.printParams()
+  override def printParams(log: Log) {
+    super.printParams(log)
 
-    getLog.info("settings is empty? " + Option(settings).isEmpty)
-    getLog.info("repositorySystem is empty? " + Option(repositorySystem).isEmpty)
-    getLog.info("repositoryLayouts is empty? " + Option(repositoryLayouts).isEmpty)
+    log.info("settings is empty? " + Option(settings).isEmpty)
+    log.info("repositorySystem is empty? " + Option(repositorySystem).isEmpty)
+    log.info("repositoryLayouts is empty? " + Option(repositoryLayouts).isEmpty)
 
-    JavaConversions.mapAsScalaMap(repositoryLayouts).foreach((p: (String, ArtifactRepositoryLayout)) => getLog.info("Layout " + p._1 + " casts " + classOf[ArtifactRepositoryLayout].cast(p._2)))
+    JavaConversions.mapAsScalaMap(repositoryLayouts).foreach((p: (String, ArtifactRepositoryLayout)) => log.info("Layout " + p._1 + " casts " + classOf[ArtifactRepositoryLayout].cast(p._2)))
 
-    getLog.info("repositoryLayout: " + repositoryLayout)
+    log.info("repositoryLayout: " + repositoryLayout)
   }
 }

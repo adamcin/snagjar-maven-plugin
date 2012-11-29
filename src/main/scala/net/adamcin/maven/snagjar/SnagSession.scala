@@ -20,7 +20,7 @@ class SnagSession(val filter: String,
                   val snagFile: File,
                   val recursive: Boolean) {
 
-  val log: Logger = LoggerFactory.getLogger(getClass)
+  val log = LoggerFactory.getLogger(getClass)
 
   lazy val tmpDir: File = {
     val tmp = File.createTempFile(getClass.getSimpleName, "")

@@ -3,6 +3,7 @@ package net.adamcin.maven.snagjar
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import java.io.File
+import org.apache.maven.plugin.logging.Log
 
 /**
  * Base snagjar mojo defining common parameters and basic begin-iterate-end logic
@@ -10,7 +11,7 @@ import java.io.File
  * @version $Id: AbstractSnagJarMojo.java$
  * @author madamcin
  */
-abstract class AbstractSnagJarMojo[SnagContext] extends AbstractMojo with PrintsParams {
+abstract class AbstractSnagJarMojo[SnagContext] extends BaseMojo {
   // -----------------------------------------------
   // Maven Parameters
   // -----------------------------------------------
@@ -104,11 +105,11 @@ abstract class AbstractSnagJarMojo[SnagContext] extends AbstractMojo with Prints
   /**
    * print injected maven component and parameter values
    */
-  override def printParams() {
-    getLog.info("filter: " + filter)
-    getLog.info("indexFile: " + indexFile.getAbsolutePath)
-    getLog.info("snagFile: " + snagFile)
-    getLog.info("skip: " + skip)
-    getLog.info("recursive: " + recursive)
+  override def printParams(log: Log) {
+    log.info("filter: " + filter)
+    log.info("indexFile: " + indexFile.getAbsolutePath)
+    log.info("snagFile: " + snagFile)
+    log.info("skip: " + skip)
+    log.info("recursive: " + recursive)
   }
 }

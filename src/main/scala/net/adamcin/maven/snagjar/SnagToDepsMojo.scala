@@ -6,6 +6,7 @@ import org.apache.maven.model.{Dependency, DependencyManagement, Model}
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
 import collection.immutable.TreeSet
+import org.apache.maven.plugin.logging.Log
 
 class ToDepsContext(val gavs: TreeSet[GAV])
 
@@ -70,10 +71,10 @@ class SnagToDepsMojo extends AbstractSnagJarMojo[ToDepsContext] {
     dep
   }
 
-  override def printParams() {
-    super.printParams()
-    getLog.info("depsFile: " + depsFile)
-    getLog.info("scope: " + scope)
+  override def printParams(log: Log) {
+    super.printParams(log)
+    log.info("depsFile: " + depsFile)
+    log.info("scope: " + scope)
   }
 
 }

@@ -55,9 +55,4 @@ class SnagToLocalMojo extends AbstractSnagJarMojo[ToLocalContext] with InstallsT
 
   // override this method to perform logic after all artifacts have been snagged
   def end(context: ToLocalContext) { }
-
-
-  override def printParams() {
-    super.printParams()
-  }
 }

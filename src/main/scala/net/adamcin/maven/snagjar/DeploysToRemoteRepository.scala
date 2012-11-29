@@ -5,6 +5,7 @@ import collection.JavaConversions
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
+import org.apache.maven.plugin.logging.Log
 
 /**
  *
@@ -45,18 +46,18 @@ trait DeploysToRemoteRepository extends AccessToRepositories {
         listener)
   }
 
-  override def printParams() {
-    super.printParams()
+  override def printParams(log: Log) {
+    super.printParams(log)
 
-    getLog.info("url: " + url)
-    getLog.info("repositoryId: " + repositoryId)
+    log.info("url: " + url)
+    log.info("repositoryId: " + repositoryId)
 
     val remoteRepoOption = Option(remoteRepository)
-    getLog.info("remoteRepository is empty? " + remoteRepoOption.isEmpty)
+    log.info("remoteRepository is empty? " + remoteRepoOption.isEmpty)
     remoteRepoOption match {
       case Some(repo) =>
-        getLog.info("remoteRepository id: " + repo.getId)
-        getLog.info("remoteRepository url: " + repo.getUrl)
+        log.info("remoteRepository id: " + repo.getId)
+        log.info("remoteRepository url: " + repo.getUrl)
       case None =>
     }
   }

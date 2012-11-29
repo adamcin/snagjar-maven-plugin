@@ -36,10 +36,6 @@ class SnagToLogMojo extends AbstractSnagJarMojo[ToLogContext] {
     getLog.info("# Artifacts: " + context.artifactCount)
   }
 
-  override def printParams() {
-    super.printParams()
-  }
-
   def toRelative(basedir: File, absolutePath: String) = {
     val rightSlashPath = absolutePath.replace('\\', '/')
     val basedirPath = basedir.getAbsolutePath.replace('\\', '/')

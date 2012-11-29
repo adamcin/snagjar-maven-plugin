@@ -4,6 +4,7 @@ import java.io.File
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
+import org.apache.maven.plugin.logging.Log
 
 /**
  *
@@ -38,16 +39,16 @@ trait InstallsToLocalRepository extends AccessToRepositories {
       listener)
   }
 
-  override def printParams() {
-    super.printParams()
+  override def printParams(log: Log) {
+    super.printParams(log)
 
-    getLog.info("localRepositoryPath: " + localRepositoryPath)
+    log.info("localRepositoryPath: " + localRepositoryPath)
 
     val localRepoOption = Option(localRepository)
-    getLog.info("localRepository is empty? " + localRepoOption.isEmpty)
+    log.info("localRepository is empty? " + localRepoOption.isEmpty)
     localRepoOption match {
       case Some(repo) =>
-        getLog.info("localRepository real path: " + localRepository.getBasedir)
+        log.info("localRepository real path: " + localRepository.getBasedir)
       case None =>
     }
   }
