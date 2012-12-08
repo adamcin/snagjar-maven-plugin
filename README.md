@@ -49,4 +49,4 @@ To recursively scan a CQ installation directory and generate a dependencyManagem
 
     mvn snagjar:to-deps -Dfilter=com.* -Drecursive=true -FsnagFile=crx-quickstart -DdepsFile=C:/workspace/cq55platform/pom.xml
     
-    
+// Test    
