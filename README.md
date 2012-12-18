@@ -15,7 +15,7 @@ Check out source to local working copy and install:
 To enable shorthand execution of the plugin from the command-line, you must add the groupId to your pluginGroups element in your maven settings.xml file:
 
     <pluginGroups>
-      <pluginGroup>net.adamcin.maven</pluginGroup>
+      <pluginGroup>net.adamcin</pluginGroup>
     </pluginGroups>
     
 Usage
