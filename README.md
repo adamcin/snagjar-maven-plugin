@@ -6,12 +6,6 @@ Maven plugin written in Scala to allow installation and deployment of arbitrary 
 Installation
 ============
 
-Check out source to local working copy and install:
-
-    git clone https://github.com/adamcin/snagjar-maven-plugin.git snagjar-maven-plugin
-    cd snagjar-maven-plugin
-    maven install
-
 To enable shorthand execution of the plugin from the command-line, you must add the groupId to your pluginGroups element in your maven settings.xml file:
 
     <pluginGroups>
