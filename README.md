@@ -6,16 +6,10 @@ Maven plugin written in Scala to allow installation and deployment of arbitrary 
 Installation
 ============
 
-Check out source to local working copy and install:
-
-    git clone https://github.com/adamcin/snagjar-maven-plugin.git snagjar-maven-plugin
-    cd snagjar-maven-plugin
-    maven install
-
 To enable shorthand execution of the plugin from the command-line, you must add the groupId to your pluginGroups element in your maven settings.xml file:
 
     <pluginGroups>
-      <pluginGroup>net.adamcin.maven</pluginGroup>
+      <pluginGroup>net.adamcin</pluginGroup>
     </pluginGroups>
     
 Usage
@@ -47,6 +41,6 @@ To recursively scan a CQ installation directory for bundles and deploy them to a
     
 To recursively scan a CQ installation directory and generate a dependencyManagement section that only includes proprietary libraries:
 
-    mvn snagjar:to-deps -Dfilter=com.* -Drecursive=true -FsnagFile=crx-quickstart -DdepsFile=C:/workspace/cq55platform/pom.xml
+    mvn snagjar:to-deps -Dfilter=com.* -Drecursive=true -DsnagFile=crx-quickstart -DdepsFile=C:/workspace/cq55platform/pom.xml
     
-// Test    
+
