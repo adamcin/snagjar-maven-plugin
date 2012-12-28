@@ -1,5 +1,6 @@
-snagjar-maven-plugin
+Snag Jar Maven Plugin (snagjar-maven-plugin)
 ====================
+[generated maven site](http://adamcin.net/snagjar-maven-plugin)
 
 Maven plugin written in Scala to allow installation and deployment of arbitrary jars into local and remote m2 repos based on embedded maven metadata.
 
