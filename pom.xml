@@ -97,6 +97,17 @@
                             <goal>testCompile</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>doc</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>doc</goal>
+                        </goals>
+                        <configuration>
+                            <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
+                            <outputDirectory>apidocs</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
