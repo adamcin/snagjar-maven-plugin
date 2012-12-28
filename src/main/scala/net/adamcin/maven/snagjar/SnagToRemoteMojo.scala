@@ -31,11 +31,10 @@ import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.repository.{ArtifactTransferListener, ArtifactTransferEvent}
 import collection.immutable.TreeSet
 
-class ToRemoteContext(val deployedGAVs: TreeSet[GAV])
-
 /**
- * @version $Id: SnagToRemoteMojo.java$
- * @author madamcin
+ * Deploy snagged artifacts to a remote maven repository
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 @Mojo(name = "to-remote", requiresProject = false)
 class SnagToRemoteMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToRemoteRepository {
@@ -64,10 +63,8 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToR
   // Members
   // -----------------------------------------------
 
-  // override this method to perform some setup logic
   def begin() = TreeSet.empty[GAV]
 
-  // override this method to perform logic on each snagged artifact
   def snagArtifact(context: TreeSet[GAV], artifact: Snaggable) = {
 
     if (context.contains(artifact.gav)) {
@@ -82,6 +79,5 @@ class SnagToRemoteMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToR
     }
   }
 
-  // override this method to perform logic after all artifacts have been snagged
   def end(context: TreeSet[GAV]) {}
 }

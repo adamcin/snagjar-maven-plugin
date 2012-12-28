@@ -27,21 +27,41 @@
 
 package net.adamcin.maven.snagjar
 
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion
+
 /**
- * TODO Create subtypes to indicate confidence and/or completeness of GAV information
- * @version $Id: GAV.java$
- * @author madamcin
+ * Case class representing basic maven artifact coordinates
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
-case class GAV(groupId: String, artifactId: String, version: String) extends Ordered[GAV] {
+case class GAV(groupId: String,
+               artifactId: String,
+               version: String)
+  extends Ordered[GAV] {
+
+  // TODO Create subtypes to indicate confidence and/or completeness of GAV information
+
+  val parsedVersion = Option(version) match {
+    case Some(v) => new DefaultArtifactVersion(version)
+    case None => new DefaultArtifactVersion("")
+  }
+
   override val toString = List(groupId, artifactId, version).mkString(":")
 
-  def compare(that: GAV) = {
+  def compareNoVersion(that: GAV) = {
     val g = this.groupId compare that.groupId
     if (g == 0) {
-      val a = this.artifactId compare that.artifactId
-      if (a == 0) {
-        this.version compare that.version
-      } else a
+      this.artifactId compare that.artifactId
     } else g
   }
+
+  def compare(that: GAV) = {
+    val a = this.compareNoVersion(that)
+    if (a == 0) {
+      this.parsedVersion compareTo that.parsedVersion
+    } else a
+  }
+
+  def min(that: GAV) = if (this < that) this else that
+  def max(that: GAV) = if (this >= that) this else that
 }

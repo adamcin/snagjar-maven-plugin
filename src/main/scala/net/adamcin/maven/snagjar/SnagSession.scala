@@ -38,9 +38,13 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader
 import org.apache.maven.model.{Dependency, Model}
 
 /**
- * SnagSession implementation
- * @version $Id: SnagSession.java$
- * @author madamcin
+ * Class that performs the directory scanning and artifact snagging
+ * @param filter basic globbing filter to be matched against maven coordinates (groupId:artifactId:version)
+ * @param indexFile file to which the snagged maven coordinates will be written
+ * @param snagFile file representing the directory or single file to be snagged during this session
+ * @param recursive whether to recurse into a snagFile directory
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 class SnagSession(val filter: String,
                   val indexFile: File,
@@ -160,6 +164,7 @@ object SnagSession {
   def propsPathToPomPath(propsPath: String): String =
     propsPath.substring(0, propsPath.length - METADATA_SUFFIX.length) + POM_SUFFIX
 
+  // TODO should return Option[Snaggable] instead and use flatMap on the resulting sequence
   def extract(file: File, session: SnagSession): Snaggable = {
     val jar = new JarFile(file)
     val opener = jarEntryOpener(jar)_

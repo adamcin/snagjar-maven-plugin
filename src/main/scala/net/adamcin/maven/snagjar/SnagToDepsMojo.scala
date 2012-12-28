@@ -33,12 +33,12 @@ import org.apache.maven.model.{Dependency, DependencyManagement, Model}
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
 import collection.immutable.TreeSet
-import org.apache.maven.plugin.logging.Log
+import org.apache.maven.plugin.MojoExecutionException
 
 /**
  * Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file
- * @version $Id: SnagToDepsMojo.java$
- * @author madamcin
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 @Mojo(name = "to-deps", requiresProject = false)
 class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
@@ -60,6 +60,17 @@ class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
   @Parameter(property = "scope")
   val scope: String = null
 
+  /**
+   * In the case where multiple versions of an artifact are snagged, specify
+   * "high" to include only the highest version in the dependencies, "low" to
+   * include only the lowest version in the dependencies, or "none" to include
+   * all versions in the dependencies, which would require manual correction
+   * to remove duplicates before use in a project dependency tree
+   */
+  @Parameter(property = "mergeVersions", defaultValue = "high")
+  val mergeVersions: String = "high"
+
+
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
@@ -79,11 +90,34 @@ class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
 
     model.setDependencyManagement(dm)
 
-    context foreach { gav => dm.addDependency(gavToDep(gav)) }
+    mergeGavs(context) foreach { gav => dm.addDependency(gavToDep(gav)) }
 
     getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
     Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
+  }
+
+  def mergeGavs(gavs: TreeSet[GAV]): List[GAV] = {
+
+    def merge(mergeOp: (GAV, GAV) => GAV): List[GAV] = gavs.foldLeft(List.empty[GAV]) {
+      (list, gav) => list match {
+        case Nil => List(gav)
+        case lastGav :: otherGavs => {
+          if (gav.compareNoVersion(lastGav) != 0) {
+            gav :: list
+          } else {
+            mergeOp(gav, lastGav) :: otherGavs
+          }
+        }
+      }
+    }
+
+    mergeVersions match {
+      case "none" => gavs.toList
+      case "high" => merge(_ max _).reverse
+      case "low" => merge(_ min _).reverse
+      case _ => throw new MojoExecutionException("Invalid mergeVersions value. Please specify 'high', 'low', or 'none'.")
+    }
   }
 
   def gavToDep(gav: GAV): Dependency = {
@@ -94,12 +128,6 @@ class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
     dep.setType("jar")
     dep.setScope(scope)
     dep
-  }
-
-  override def printParams(log: Log) {
-    super.printParams(log)
-    log.info("depsFile: " + depsFile)
-    log.info("scope: " + scope)
   }
 
 }

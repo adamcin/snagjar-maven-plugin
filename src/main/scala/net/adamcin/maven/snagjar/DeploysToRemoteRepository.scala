@@ -27,23 +27,28 @@
 
 package net.adamcin.maven.snagjar
 
-import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout
-import collection.JavaConversions
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
-import org.apache.maven.plugin.logging.Log
 
 /**
- *
- * @version $Id: DeploysToRemoteRepository.java$
- * @author madamcin
+ * Trait defining common mojo parameters and methods necessary for deployment of
+ * artifacts to remote repositories
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 trait DeploysToRemoteRepository extends AccessToRepositories {
 
+  /**
+   * Specify the url of the repository to deploy to.
+   */
   @Parameter(property = "url")
   val url: String = null
 
+  /**
+   * Specify the id of the server element in maven settings containing the
+   * repository username and password
+   */
   @Parameter(property = "repositoryId")
   val repositoryId: String = null
 
@@ -71,21 +76,5 @@ trait DeploysToRemoteRepository extends AccessToRepositories {
         artifact.pom,
         remoteRepository.getLayout.pathOfRemoteRepositoryMetadata(m2meta),
         listener)
-  }
-
-  override def printParams(log: Log) {
-    super.printParams(log)
-
-    log.info("url: " + url)
-    log.info("repositoryId: " + repositoryId)
-
-    val remoteRepoOption = Option(remoteRepository)
-    log.info("remoteRepository is empty? " + remoteRepoOption.isEmpty)
-    remoteRepoOption match {
-      case Some(repo) =>
-        log.info("remoteRepository id: " + repo.getId)
-        log.info("remoteRepository url: " + repo.getUrl)
-      case None =>
-    }
   }
 }

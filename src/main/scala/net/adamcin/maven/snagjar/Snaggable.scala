@@ -30,10 +30,13 @@ package net.adamcin.maven.snagjar
 import java.io.File
 
 /**
- *
- *
- * @version $Id: Snaggable.java$
- * @author madamcin
+ * Simple class representing a discovered jar, its maven coordinates, and its pom file
+ * @param session the current SnagSession
+ * @param gav the artifact's maven coordinates
+ * @param jar the artifact's jar file
+ * @param pom the artifact's pom file
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 class Snaggable(val session: SnagSession,
                 val gav: GAV,
@@ -42,6 +45,16 @@ class Snaggable(val session: SnagSession,
 
 }
 
+/**
+ * Companion class defining a convenient apply method
+ */
 object Snaggable {
+
+  /**
+   * Extract the provided file with the provided SnagSession
+   * @param file jar file to extract
+   * @param session SnagSession to extract the file with
+   * @return an extracted Snaggable
+   */
   def apply(file: File, session: SnagSession): Snaggable = SnagSession.extract(file, session)
 }

@@ -31,15 +31,19 @@ import java.io.File
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
-import org.apache.maven.plugin.logging.Log
 
 /**
- *
- * @version $Id: InstallsToLocalRepository.java$
- * @author madamcin
+ * Trait defining common mojo parameters and methods necessary for installation
+ * of maven artifacts to local repositories
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 trait InstallsToLocalRepository extends AccessToRepositories {
 
+  /**
+   * Specify the local repository path
+   * Refer to maven-install-plugin:install-file
+   */
   @Parameter(property = "localRepositoryPath")
   val localRepositoryPath: File = null
 
@@ -48,7 +52,6 @@ trait InstallsToLocalRepository extends AccessToRepositories {
       case Some(path) => repositorySystem.createLocalRepository(path)
       case None => repositorySystem.createDefaultLocalRepository()
     }
-
 
   def install(artifact: Snaggable, listener: ArtifactTransferListener ) {
     val (m2artifact, m2meta) = snaggableToArtifact(artifact)
@@ -64,19 +67,5 @@ trait InstallsToLocalRepository extends AccessToRepositories {
       artifact.pom,
       localRepository.getLayout.pathOfLocalRepositoryMetadata(m2meta, localRepository),
       listener)
-  }
-
-  override def printParams(log: Log) {
-    super.printParams(log)
-
-    log.info("localRepositoryPath: " + localRepositoryPath)
-
-    val localRepoOption = Option(localRepository)
-    log.info("localRepository is empty? " + localRepoOption.isEmpty)
-    localRepoOption match {
-      case Some(repo) =>
-        log.info("localRepository real path: " + localRepository.getBasedir)
-      case None =>
-    }
   }
 }

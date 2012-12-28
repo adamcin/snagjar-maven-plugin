@@ -31,8 +31,9 @@ import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.repository.{ArtifactTransferEvent, ArtifactTransferListener}
 
 /**
- * @version $Id: SnagToLocalMojo.java$
- * @author madamcin
+ * Installs snagged artifacts to the local maven repository
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 @Mojo(name = "to-local", requiresProject = false)
 class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepository {
@@ -61,10 +62,12 @@ class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocal
   // Members
   // -----------------------------------------------
 
-  // override this method to perform some setup logic
+  /**
+   * Begin with the empty set
+   * @return empty set of maven coordinates
+   */
   def begin() = Set.empty[GAV]
 
-  // override this method to perform logic on each snagged artifact
   def snagArtifact(context: Set[GAV], artifact: Snaggable) = {
     if (context.contains(artifact.gav)) {
       getLog.info("[to-local] artifact already installed: " + artifact.gav.toString)
@@ -78,6 +81,5 @@ class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocal
     }
   }
 
-  // override this method to perform logic after all artifacts have been snagged
   def end(context: Set[GAV]) { }
 }

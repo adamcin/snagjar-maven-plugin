@@ -32,8 +32,8 @@ import java.io.File
 
 /**
  * Mojo that writes all snagged artifacts to the maven execution log
- * @version $Id: SnagToLogMojo.java$
- * @author madamcin
+ * @since 0.8.0
+ * @author Mark Adamcin
  */
 @Mojo(name = "to-log", requiresProject = false)
 class SnagToLogMojo extends AbstractSnagJarMojo[Int] {
