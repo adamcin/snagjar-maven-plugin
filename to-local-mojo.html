@@ -67,8 +67,11 @@
       <p><b>Full name</b>:</p>
       <p>net.adamcin:snagjar-maven-plugin:0.7.0-SNAPSHOT:to-local</p>
       <p><b>Description</b>:</p>
-      <div>(no description)</div>
+      <div><div>Installs snagged artifacts to the local maven repository</div></div>
       <p><b>Attributes</b>:</p>
+      <ul>
+        <li>Since version: <tt>0.8.0</tt>.</li>
+      </ul>
       <div class="section"><h3>Optional Parameters<a name="Optional_Parameters"></a></h3>
         <table class="bodyTable" border="0">
           <tr class="a">
@@ -80,90 +83,107 @@
           <tr class="b">
             <td><b><a href="#filter">filter</a></b></td>
             <td><tt>String</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>Default value is</b>: <tt>*</tt>.<br /><b>User property is</b>: <tt>filter</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>applies a standard GAV (groupId:artifactId:version) filter to
+the snagged artifacts (format: *:*:*)</div><br /><b>Default value is</b>: <tt>*</tt>.<br /><b>User property is</b>: <tt>filter</tt>.</td>
           </tr>
           <tr class="a">
             <td><b><a href="#indexFile">indexFile</a></b></td>
             <td><tt>File</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>Default value is</b>: <tt>snagIndex.txt</tt>.<br /><b>User property is</b>: <tt>indexFile</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>specify the location of the generated index file, useful for
+subsequent shell processing of snagged artifacts</div><br /><b>Default value is</b>: <tt>snagIndex.txt</tt>.<br /><b>User property is</b>: <tt>indexFile</tt>.</td>
           </tr>
           <tr class="b">
             <td><b><a href="#localRepositoryPath">localRepositoryPath</a></b></td>
             <td><tt>File</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>User property is</b>: <tt>localRepositoryPath</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>Specify the local repository path Refer to
+maven-install-plugin:install-file</div><br /><b>User property is</b>: <tt>localRepositoryPath</tt>.</td>
           </tr>
           <tr class="a">
             <td><b><a href="#recursive">recursive</a></b></td>
             <td><tt>boolean</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>User property is</b>: <tt>recursive</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>set to true to recursively scan directories for jar
+files</div><br /><b>User property is</b>: <tt>recursive</tt>.</td>
           </tr>
           <tr class="b">
             <td><b><a href="#repositoryLayout">repositoryLayout</a></b></td>
             <td><tt>String</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>User property is</b>: <tt>repositoryLayout</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>Specify the repository layout to use for local and remote
+repositories</div><br /><b>User property is</b>: <tt>repositoryLayout</tt>.</td>
           </tr>
           <tr class="a">
             <td><b><a href="#skip">skip</a></b></td>
             <td><tt>boolean</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>User property is</b>: <tt>skip</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>set to true to skip mojo execution altogether</div><br /><b>User property is</b>: <tt>skip</tt>.</td>
           </tr>
           <tr class="b">
             <td><b><a href="#snagFile">snagFile</a></b></td>
             <td><tt>File</tt></td>
-            <td><tt>-</tt></td>
-            <td>(no description)<br /><b>Default value is</b>: <tt>.</tt>.<br /><b>User property is</b>: <tt>snagFile</tt>.</td>
+            <td><tt>0.8.0</tt></td>
+            <td><div>jar or directory containing jars to snag</div><br /><b>Default value is</b>: <tt>.</tt>.<br /><b>User property is</b>: <tt>snagFile</tt>.</td>
           </tr>
         </table>
       </div>
       <div class="section"><h3>Parameter Details<a name="Parameter_Details"></a></h3>
         <p><b><a name="filter">filter</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>applies a standard GAV (groupId:artifactId:version) filter to
+the snagged artifacts (format: *:*:*)</div></div>
         <ul>
           <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>filter</tt></li>
           <li><b>Default</b>: <tt>*</tt></li>
         </ul><hr /><p><b><a name="indexFile">indexFile</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>specify the location of the generated index file, useful for
+subsequent shell processing of snagged artifacts</div></div>
         <ul>
           <li><b>Type</b>: <tt>java.io.File</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>indexFile</tt></li>
           <li><b>Default</b>: <tt>snagIndex.txt</tt></li>
         </ul><hr /><p><b><a name="localRepositoryPath">localRepositoryPath</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>Specify the local repository path Refer to
+maven-install-plugin:install-file</div></div>
         <ul>
           <li><b>Type</b>: <tt>java.io.File</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>localRepositoryPath</tt></li>
         </ul><hr /><p><b><a name="recursive">recursive</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>set to true to recursively scan directories for jar
+files</div></div>
         <ul>
           <li><b>Type</b>: <tt>boolean</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>recursive</tt></li>
         </ul><hr /><p><b><a name="repositoryLayout">repositoryLayout</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>Specify the repository layout to use for local and remote
+repositories</div></div>
         <ul>
           <li><b>Type</b>: <tt>java.lang.String</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>repositoryLayout</tt></li>
         </ul><hr /><p><b><a name="skip">skip</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>set to true to skip mojo execution altogether</div></div>
         <ul>
           <li><b>Type</b>: <tt>boolean</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>skip</tt></li>
         </ul><hr /><p><b><a name="snagFile">snagFile</a>:</b></p>
-        <div>(no description)</div>
+        <div><div>jar or directory containing jars to snag</div></div>
         <ul>
           <li><b>Type</b>: <tt>java.io.File</tt></li>
+          <li><b>Since</b>: <tt>0.8.0</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
           <li><b>User Property</b>: <tt>snagFile</tt></li>
           <li><b>Default</b>: <tt>.</tt></li>
