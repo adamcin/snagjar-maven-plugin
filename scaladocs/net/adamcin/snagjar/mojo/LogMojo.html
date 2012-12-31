@@ -2,21 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>net.adamcin.snagjar.SnagToDepsMojo</title>
+          <title>net.adamcin.snagjar.mojo.LogMojo</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link type="text/css" media="screen" rel="stylesheet" href="../../../lib/template.css" />
-      <script type="text/javascript" src="../../../lib/jquery.js"></script>
-      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../../lib/template.js"></script>
-      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../../lib/template.css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
     
         </head>
         <body onload="sh_highlightDocument('../lib/', '.min.js');" class="type">
       <div id="definition">
-        <img src="../../../lib/class_big.png" />
-        <p id="owner"><a name="net" class="extype" href="../../package.html">net</a>.<a name="net.adamcin" class="extype" href="../package.html">adamcin</a>.<a name="net.adamcin.snagjar" class="extype" href="package.html">snagjar</a></p>
-        <h1>SnagToDepsMojo</h1>
+        <img src="../../../../lib/class_big.png" />
+        <p id="owner"><a name="net" class="extype" href="../../../package.html">net</a>.<a name="net.adamcin" class="extype" href="../../package.html">adamcin</a>.<a name="net.adamcin.snagjar" class="extype" href="../package.html">snagjar</a>.<a name="net.adamcin.snagjar.mojo" class="extype" href="package.html">mojo</a></p>
+        <h1>LogMojo</h1>
       </div>
 
       <h4 class="signature" id="signature">
@@ -25,16 +25,16 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">SnagToDepsMojo</span><span class="result"> extends <a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]]</span>
+        <span class="name">LogMojo</span><span class="result"> extends <a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.Int" class="extype">Int</span>]</span>
       </span>
       </h4>
       
-      <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+      <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Mojo that writes all snagged artifacts to the maven execution log</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@Mojo</span><span class="args">()</span>
               
         </dd><dt>Since</dt><dd><p>0.8.0</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]], <span name="org.apache.maven.plugin.AbstractMojo" class="extype">AbstractMojo</span>, <span name="org.apache.maven.plugin.ContextEnabled" class="extype">ContextEnabled</span>, <span name="org.apache.maven.plugin.Mojo" class="extype">Mojo</span>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+          <div class="superTypes hiddenContent"><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.Int" class="extype">Int</span>], <span name="org.apache.maven.plugin.AbstractMojo" class="extype">AbstractMojo</span>, <span name="org.apache.maven.plugin.ContextEnabled" class="extype">ContextEnabled</span>, <span name="org.apache.maven.plugin.Mojo" class="extype">Mojo</span>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
     
 
@@ -48,7 +48,7 @@
               <span class="filtertype">Inherited</span>
               <ol><li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li></ol>
-              <ol id="linearization"><li name="net.adamcin.snagjar.SnagToDepsMojo" class="in"><span>SnagToDepsMojo</span></li><li name="net.adamcin.snagjar.AbstractSnagJarMojo" class="in"><span>AbstractSnagJarMojo</span></li><li name="org.apache.maven.plugin.AbstractMojo" class="in"><span>AbstractMojo</span></li><li name="org.apache.maven.plugin.ContextEnabled" class="in"><span>ContextEnabled</span></li><li name="org.apache.maven.plugin.Mojo" class="in"><span>Mojo</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+              <ol id="linearization"><li name="net.adamcin.snagjar.mojo.LogMojo" class="in"><span>LogMojo</span></li><li name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="in"><span>AbstractSnagJarMojo</span></li><li name="org.apache.maven.plugin.AbstractMojo" class="in"><span>AbstractMojo</span></li><li name="org.apache.maven.plugin.ContextEnabled" class="in"><span>ContextEnabled</span></li><li name="org.apache.maven.plugin.Mojo" class="in"><span>Mojo</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
             </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -60,15 +60,15 @@
         <div id="allMembers">
         <div class="members" id="constructors">
               <h3>Instance Constructors</h3>
-              <ol><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#this" data-isabs="false">
-      <a id="this:SnagToDepsMojo"></a>
+              <ol><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo#this" data-isabs="false">
+      <a id="this:LogMojo"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">SnagToDepsMojo</span><span class="params">()</span>
+        <span class="name">LogMojo</span><span class="params">()</span>
       </span>
       </h4>
       
@@ -153,18 +153,18 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#begin" data-isabs="false">
-      <a id="begin():TreeSet[GAV]"></a>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo#begin" data-isabs="false">
+      <a id="begin():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">begin</span><span class="params">()</span><span class="result">: <span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>
+        <span class="name">begin</span><span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.SnagToDepsMojo" class="extype" href="">SnagToDepsMojo</a> → <a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.LogMojo" class="extype" href="">LogMojo</a> → <a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
@@ -176,23 +176,11 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#defaultDepsFile" data-isabs="false">
-      <a id="defaultDepsFile:java.lang.String(&quot;deps.xml&quot;)"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultDepsFile</span><span class="result">: java.lang.String(&quot;deps.xml&quot;)</span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#defaultFilter" data-isabs="false">
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#defaultFilter" data-isabs="false">
       <a id="defaultFilter:java.lang.String(&quot;*&quot;)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -203,8 +191,8 @@
         <span class="name">defaultFilter</span><span class="result">: java.lang.String(&quot;*&quot;)</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#defaultIndexFile" data-isabs="false">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#defaultIndexFile" data-isabs="false">
       <a id="defaultIndexFile:java.lang.String(&quot;snagIndex.txt&quot;)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -215,8 +203,8 @@
         <span class="name">defaultIndexFile</span><span class="result">: java.lang.String(&quot;snagIndex.txt&quot;)</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#defaultSnagFile" data-isabs="false">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#defaultSnagFile" data-isabs="false">
       <a id="defaultSnagFile:java.lang.String(&quot;.&quot;)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -227,32 +215,19 @@
         <span class="name">defaultSnagFile</span><span class="result">: java.lang.String(&quot;.&quot;)</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#depsFile" data-isabs="false">
-      <a id="depsFile:File"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">depsFile</span><span class="result">: <span name="java.io.File" class="extype">File</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Write resulting dependencyManagement section to this path
-</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#end" data-isabs="false">
-      <a id="end(TreeSet[GAV]):Unit"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo#end" data-isabs="false">
+      <a id="end(Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">end</span><span class="params">(<span name="context">context: <span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+        <span class="name">end</span><span class="params">(<span name="context">context: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.SnagToDepsMojo" class="extype" href="">SnagToDepsMojo</a> → <a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.LogMojo" class="extype" href="">LogMojo</a> → <a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
@@ -277,7 +252,7 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#execute" data-isabs="false">
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#execute" data-isabs="false">
       <a id="execute():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -289,8 +264,8 @@
       </span>
       </h4>
       <p class="shortcomment cmt">core mojo method.</p><div class="fullcomment"><div class="comment cmt"><p>core mojo method. do not override.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a> → Mojo</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#filter" data-isabs="false">
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a> → Mojo</dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#filter" data-isabs="false">
       <a id="filter:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -305,7 +280,7 @@
 (format: *:*:*)
 </p><div class="fullcomment"><div class="comment cmt"><p>applies a standard GAV (groupId:artifactId:version) filter to the snagged artifacts
 (format: *:*:*)
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
@@ -317,22 +292,10 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#gavToDep" data-isabs="false">
-      <a id="gavToDep(GAV):Dependency"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">gavToDep</span><span class="params">(<span name="gav">gav: <a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a></span>)</span><span class="result">: <span name="org.apache.maven.model.Dependency" class="extype">Dependency</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
@@ -358,14 +321,14 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractMojo → Mojo</dd></dl></div>
     </li><li visbl="pub" name="org.apache.maven.plugin.AbstractMojo#getPluginContext" data-isabs="false">
-      <a id="getPluginContext():Map"></a>
+      <a id="getPluginContext():java.util.Map[_, _]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getPluginContext</span><span class="params">()</span><span class="result">: <span name="java.util.Map" class="extype">Map</span></span>
+        <span class="name">getPluginContext</span><span class="params">()</span><span class="result">: java.util.Map[_, _]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractMojo → ContextEnabled</dd></dl></div>
@@ -381,7 +344,7 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#indexFile" data-isabs="false">
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#indexFile" data-isabs="false">
       <a id="indexFile:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -396,7 +359,7 @@
 shell processing of snagged artifacts
 </p><div class="fullcomment"><div class="comment cmt"><p>specify the location of the generated index file, useful for subsequent
 shell processing of snagged artifacts
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
@@ -409,35 +372,6 @@ shell processing of snagged artifacts
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#mergeGavs" data-isabs="false">
-      <a id="mergeGavs(TreeSet[GAV]):List[GAV]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">mergeGavs</span><span class="params">(<span name="gavs">gavs: <span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>)</span><span class="result">: List[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#mergeVersions" data-isabs="false">
-      <a id="mergeVersions:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">mergeVersions</span><span class="result">: String</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">In the case where multiple versions of an artifact are snagged, specify
-&quot;high&quot; to include only the highest version in the dependencies, &quot;low&quot; to
-include only the lowest version in the dependencies, or &quot;none&quot; to include
-all versions in the dependencies, which would require manual correction
-to remove duplicates before use in a project dependency tree
-</p>
     </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
@@ -474,7 +408,7 @@ to remove duplicates before use in a project dependency tree
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#recursive" data-isabs="false">
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#recursive" data-isabs="false">
       <a id="recursive:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -487,20 +421,7 @@ to remove duplicates before use in a project dependency tree
       </h4>
       <p class="shortcomment cmt">set to true to recursively scan directories for jar files
 </p><div class="fullcomment"><div class="comment cmt"><p>set to true to recursively scan directories for jar files
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#scope" data-isabs="false">
-      <a id="scope:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">scope</span><span class="result">: String</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Set the 'scope' element for all the snagged dependencies to this value
-</p>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="pub" name="org.apache.maven.plugin.AbstractMojo#setLog" data-isabs="false">
       <a id="setLog(Log):Unit"></a>
       <h4 class="signature">
@@ -514,18 +435,18 @@ to remove duplicates before use in a project dependency tree
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractMojo → Mojo</dd></dl></div>
     </li><li visbl="pub" name="org.apache.maven.plugin.AbstractMojo#setPluginContext" data-isabs="false">
-      <a id="setPluginContext(Map):Unit"></a>
+      <a id="setPluginContext(java.util.Map[_, _]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setPluginContext</span><span class="params">(<span name="arg0">arg0: <span name="java.util.Map" class="extype">Map</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+        <span class="name">setPluginContext</span><span class="params">(<span name="arg0">arg0: java.util.Map[_, _]</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AbstractMojo → ContextEnabled</dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#skip" data-isabs="false">
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#skip" data-isabs="false">
       <a id="skip:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -538,20 +459,20 @@ to remove duplicates before use in a project dependency tree
       </h4>
       <p class="shortcomment cmt">set to true to skip mojo execution altogether
 </p><div class="fullcomment"><div class="comment cmt"><p>set to true to skip mojo execution altogether
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo#snagArtifact" data-isabs="false">
-      <a id="snagArtifact(TreeSet[GAV],Snaggable):TreeSet[GAV]"></a>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo#snagArtifact" data-isabs="false">
+      <a id="snagArtifact(Int,Snaggable):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">snagArtifact</span><span class="params">(<span name="context">context: <span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>, <span name="artifact">artifact: <a name="net.adamcin.snagjar.Snaggable" class="extype" href="Snaggable.html">Snaggable</a></span>)</span><span class="result">: <span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]</span>
+        <span class="name">snagArtifact</span><span class="params">(<span name="context">context: <span name="scala.Int" class="extype">Int</span></span>, <span name="artifact">artifact: <a name="net.adamcin.snagjar.Snaggable" class="extype" href="../Snaggable.html">Snaggable</a></span>)</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.SnagToDepsMojo" class="extype" href="">SnagToDepsMojo</a> → <a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo#snagFile" data-isabs="false">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.LogMojo" class="extype" href="">LogMojo</a> → <a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo#snagFile" data-isabs="false">
       <a id="snagFile:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -564,7 +485,7 @@ to remove duplicates before use in a project dependency tree
       </h4>
       <p class="shortcomment cmt">jar or directory containing jars to snag
 </p><div class="fullcomment"><div class="comment cmt"><p>jar or directory containing jars to snag
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
       <a id="synchronized[T0](⇒ T0):T0"></a>
       <h4 class="signature">
@@ -577,6 +498,18 @@ to remove duplicates before use in a project dependency tree
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo#toRelative" data-isabs="false">
+      <a id="toRelative(File,String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toRelative</span><span class="params">(<span name="basedir">basedir: <span name="java.io.File" class="extype">File</span></span>, <span name="absolutePath">absolutePath: String</span>)</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#toString" data-isabs="false">
       <a id="toString():String"></a>
       <h4 class="signature">
@@ -641,8 +574,8 @@ to remove duplicates before use in a project dependency tree
         </div>
 
         <div id="inheritedMembers">
-        <div name="net.adamcin.snagjar.AbstractSnagJarMojo" class="parent">
-              <h3>Inherited from <a name="net.adamcin.snagjar.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.collection.immutable.TreeSet" class="extype">TreeSet</span>[<a name="net.adamcin.snagjar.GAV" class="extype" href="GAV.html">GAV</a>]]</h3>
+        <div name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="parent">
+              <h3>Inherited from <a name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" class="extype" href="AbstractSnagJarMojo.html">AbstractSnagJarMojo</a>[<span name="scala.Int" class="extype">Int</span>]</h3>
             </div><div name="org.apache.maven.plugin.AbstractMojo" class="parent">
               <h3>Inherited from <span name="org.apache.maven.plugin.AbstractMojo" class="extype">AbstractMojo</span></h3>
             </div><div name="org.apache.maven.plugin.ContextEnabled" class="parent">

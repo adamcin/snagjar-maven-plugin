@@ -48,19 +48,7 @@
 
         <div class="types members" id="types">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="net.adamcin.snagjar.AbstractSnagJarMojo" data-isabs="true">
-      <a id="AbstractSnagJarMojo:AbstractSnagJarMojo[SnagContext]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="AbstractSnagJarMojo.html"><span class="name">AbstractSnagJarMojo</span></a><span class="tparams">[<span name="SnagContext">SnagContext</span>]</span><span class="result"> extends AbstractMojo</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Base snagjar mojo defining common parameters and basic begin-iterate-end logic</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.AccessToRepositories" data-isabs="true">
+              <ol><li visbl="pub" name="net.adamcin.snagjar.AccessToRepositories" data-isabs="true">
       <a id="AccessToRepositories:AccessToRepositories"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,18 +85,6 @@ artifacts to remote repositories</p>
       </span>
       </h4>
       <p class="comment cmt">Case class representing basic maven artifact coordinates</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.HelpMojo" data-isabs="false">
-      <a id="HelpMojo:HelpMojo"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="HelpMojo.html"><span class="name">HelpMojo</span></a><span class="result"> extends AbstractMojo</span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="net.adamcin.snagjar.InstallsToLocalRepository" data-isabs="true">
       <a id="InstallsToLocalRepository:InstallsToLocalRepository"></a>
       <h4 class="signature">
@@ -134,54 +110,6 @@ of maven artifacts to local repositories</p>
       </span>
       </h4>
       <p class="comment cmt">Class that performs the directory scanning and artifact snagging</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToDepsMojo" data-isabs="false">
-      <a id="SnagToDepsMojo:SnagToDepsMojo"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="SnagToDepsMojo.html"><span class="name">SnagToDepsMojo</span></a><span class="result"> extends AbstractSnagJarMojo[TreeSet[GAV]]</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToLocalMojo" data-isabs="false">
-      <a id="SnagToLocalMojo:SnagToLocalMojo"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="SnagToLocalMojo.html"><span class="name">SnagToLocalMojo</span></a><span class="result"> extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepository</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Installs snagged artifacts to the local maven repository</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToLogMojo" data-isabs="false">
-      <a id="SnagToLogMojo:SnagToLogMojo"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="SnagToLogMojo.html"><span class="name">SnagToLogMojo</span></a><span class="result"> extends AbstractSnagJarMojo[Int]</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Mojo that writes all snagged artifacts to the maven execution log</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagToRemoteMojo" data-isabs="false">
-      <a id="SnagToRemoteMojo:SnagToRemoteMojo"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="SnagToRemoteMojo.html"><span class="name">SnagToRemoteMojo</span></a><span class="result"> extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToRemoteRepository</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Deploy snagged artifacts to a remote maven repository</p>
     </li><li visbl="pub" name="net.adamcin.snagjar.Snaggable" data-isabs="false">
       <a id="Snaggable:Snaggable"></a>
       <h4 class="signature">
@@ -226,6 +154,18 @@ of maven artifacts to local repositories</p>
       </h4>
       <p class="comment cmt">Companion class defining a convenient apply method
 </p>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo" data-isabs="false">
+      <a id="mojo:mojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="mojo/package.html"><span class="name">mojo</span></a>
+      </span>
+      </h4>
+      
     </li></ol>
             </div>
 

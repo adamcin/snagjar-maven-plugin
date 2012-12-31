@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>net.adamcin.snagjar.mojo</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../../lib/template.css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a name="net" class="extype" href="../../../package.html">net</a>.<a name="net.adamcin" class="extype" href="../../package.html">adamcin</a>.<a name="net.adamcin.snagjar" class="extype" href="../package.html">snagjar</a></p>
+        <h1>mojo</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mojo</span>
+      </span>
+      </h4>
+      
+      <div class="fullcommenttop" id="comment"></div>
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div class="types members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" data-isabs="true">
+      <a id="AbstractSnagJarMojo:AbstractSnagJarMojo[SnagContext]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="AbstractSnagJarMojo.html"><span class="name">AbstractSnagJarMojo</span></a><span class="tparams">[<span name="SnagContext">SnagContext</span>]</span><span class="result"> extends AbstractMojo</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Base snagjar mojo defining common parameters and basic begin-iterate-end logic</p>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.DependenciesMojo" data-isabs="false">
+      <a id="DependenciesMojo:DependenciesMojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DependenciesMojo.html"><span class="name">DependenciesMojo</span></a><span class="result"> extends AbstractSnagJarMojo[TreeSet[GAV]]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file</&gt;</&lt;</p>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.DeployMojo" data-isabs="false">
+      <a id="DeployMojo:DeployMojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DeployMojo.html"><span class="name">DeployMojo</span></a><span class="result"> extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToRemoteRepository</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Deploy snagged artifacts to a remote maven repository</p>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.HelpMojo" data-isabs="false">
+      <a id="HelpMojo:HelpMojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="HelpMojo.html"><span class="name">HelpMojo</span></a><span class="result"> extends AbstractMojo</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.InstallMojo" data-isabs="false">
+      <a id="InstallMojo:InstallMojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="InstallMojo.html"><span class="name">InstallMojo</span></a><span class="result"> extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepository</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Installs snagged artifacts to the local maven repository</p>
+    </li><li visbl="pub" name="net.adamcin.snagjar.mojo.LogMojo" data-isabs="false">
+      <a id="LogMojo:LogMojo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="LogMojo.html"><span class="name">LogMojo</span></a><span class="result"> extends AbstractSnagJarMojo[Int]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Mojo that writes all snagged artifacts to the maven execution log</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
