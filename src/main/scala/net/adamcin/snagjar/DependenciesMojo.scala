@@ -36,12 +36,12 @@ import collection.immutable.TreeSet
 import org.apache.maven.plugin.MojoExecutionException
 
 /**
- * Snags artifacts into a sorted, distincted dependencyManagement block in a stub maven pom file
+ * Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file
  * @since 0.8.0
  * @author Mark Adamcin
  */
-@Mojo(name = "to-deps", requiresProject = false)
-class SnagToDepsMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
+@Mojo(name = "dependencies", requiresProject = false)
+class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
 
   // -----------------------------------------------
   // Maven Parameters

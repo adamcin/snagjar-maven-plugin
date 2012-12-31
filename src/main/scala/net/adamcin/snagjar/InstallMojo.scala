@@ -35,16 +35,16 @@ import org.apache.maven.repository.{ArtifactTransferEvent, ArtifactTransferListe
  * @since 0.8.0
  * @author Mark Adamcin
  */
-@Mojo(name = "to-local", requiresProject = false)
-class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepository {
+@Mojo(name = "install", requiresProject = false)
+class InstallMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepository {
 
   val listener = new ArtifactTransferListener {
     def transferCompleted(p1: ArtifactTransferEvent) {
-      getLog.info("[to-local] transfer completed: " + p1.getResource)
+      getLog.info("transfer completed: " + p1.getResource)
     }
 
     def transferInitiated(p1: ArtifactTransferEvent) {
-      getLog.debug("[to-local] transfer initiated: " + p1)
+      getLog.debug("transfer initiated: " + p1)
     }
 
     def isShowChecksumEvents = false
@@ -54,7 +54,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocal
     def setShowChecksumEvents(p1: Boolean) {}
 
     def transferStarted(p1: ArtifactTransferEvent) {
-      getLog.debug("[to-local] transfer started: " + p1.getResource)
+      getLog.debug("transfer started: " + p1.getResource)
     }
   }
 
@@ -70,7 +70,7 @@ class SnagToLocalMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocal
 
   def snagArtifact(context: Set[GAV], artifact: Snaggable) = {
     if (context.contains(artifact.gav)) {
-      getLog.info("[to-local] artifact already installed: " + artifact.gav.toString)
+      getLog.info("artifact already installed: " + artifact.gav.toString)
       context
     } else {
       getLog.info(artifact.gav.toString)
