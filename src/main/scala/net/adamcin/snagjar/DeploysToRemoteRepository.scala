@@ -25,47 +25,56 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.maven.snagjar
+package net.adamcin.snagjar
 
-import java.io.File
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
 
 /**
- * Trait defining common mojo parameters and methods necessary for installation
- * of maven artifacts to local repositories
+ * Trait defining common mojo parameters and methods necessary for deployment of
+ * artifacts to remote repositories
  * @since 0.8.0
  * @author Mark Adamcin
  */
-trait InstallsToLocalRepository extends AccessToRepositories {
+trait DeploysToRemoteRepository extends AccessToRepositories {
 
   /**
-   * Specify the local repository path
-   * Refer to maven-install-plugin:install-file
+   * Specify the url of the repository to deploy to.
    */
-  @Parameter(property = "localRepositoryPath")
-  val localRepositoryPath: File = null
+  @Parameter(property = "url")
+  val url: String = null
 
-  lazy val localRepository: ArtifactRepository =
-    Option(localRepositoryPath) match {
-      case Some(path) => repositorySystem.createLocalRepository(path)
-      case None => repositorySystem.createDefaultLocalRepository()
+  /**
+   * Specify the id of the server element in maven settings containing the
+   * repository username and password
+   */
+  @Parameter(property = "repositoryId")
+  val repositoryId: String = null
+
+  lazy val remoteRepository: ArtifactRepository =
+    (Option(repositoryId), Option(url)) match {
+      case (Some(pId), Some(pUrl)) =>
+        repositorySystem.createArtifactRepository(pId, pUrl, layout, snapshotPolicy, releasePolicy)
+      case (None, Some(pUrl)) =>
+        repositorySystem.createArtifactRepository(null, pUrl, layout, snapshotPolicy, releasePolicy)
+      case (_, _) =>
+        repositorySystem.createDefaultRemoteRepository()
     }
 
-  def install(artifact: Snaggable, listener: ArtifactTransferListener ) {
-    val (m2artifact, m2meta) = snaggableToArtifact(artifact)
+  def deploy(artifact: Snaggable, listener: ArtifactTransferListener ) {
+      val (m2artifact, m2meta) = snaggableToArtifact(artifact)
 
-    repositorySystem.publish(
-      localRepository,
-      artifact.jar,
-      localRepository.getLayout.pathOf(m2artifact),
-      listener)
+      repositorySystem.publish(
+        remoteRepository,
+        artifact.jar,
+        remoteRepository.getLayout.pathOf(m2artifact),
+        listener)
 
-    repositorySystem.publish(
-      localRepository,
-      artifact.pom,
-      localRepository.getLayout.pathOfLocalRepositoryMetadata(m2meta, localRepository),
-      listener)
+      repositorySystem.publish(
+        remoteRepository,
+        artifact.pom,
+        remoteRepository.getLayout.pathOfRemoteRepositoryMetadata(m2meta),
+        listener)
   }
 }

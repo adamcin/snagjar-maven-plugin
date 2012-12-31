@@ -25,62 +25,59 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.maven.snagjar
+package net.adamcin.snagjar
 
 import org.apache.maven.plugins.annotations.Mojo
-import java.io.File
+import org.apache.maven.repository.{ArtifactTransferListener, ArtifactTransferEvent}
+import collection.immutable.TreeSet
 
 /**
- * Mojo that writes all snagged artifacts to the maven execution log
+ * Deploy snagged artifacts to a remote maven repository
  * @since 0.8.0
  * @author Mark Adamcin
  */
-@Mojo(name = "to-log", requiresProject = false)
-class SnagToLogMojo extends AbstractSnagJarMojo[Int] {
+@Mojo(name = "to-remote", requiresProject = false)
+class SnagToRemoteMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToRemoteRepository {
+
+  val listener = new ArtifactTransferListener {
+    def transferCompleted(p1: ArtifactTransferEvent) {
+      getLog.info("[to-remote] transfer completed: " + p1.getResource)
+    }
+
+    def transferInitiated(p1: ArtifactTransferEvent) {
+      getLog.debug("[to-remote] transfer initiated: " + p1)
+    }
+
+    def isShowChecksumEvents = false
+
+    def transferProgress(p1: ArtifactTransferEvent) { }
+
+    def setShowChecksumEvents(p1: Boolean) {}
+
+    def transferStarted(p1: ArtifactTransferEvent) {
+      getLog.debug("[to-remote] transfer started: " + p1.getResource)
+    }
+  }
 
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
 
-  def begin() = {
-    getLog.info("------------------------------------------------------------------------")
-    getLog.info("Snagging Artifacts to Log...")
-    getLog.info("------------------------------------------------------------------------")
-    0
-  }
+  def begin() = TreeSet.empty[GAV]
 
-  def snagArtifact(context: Int, artifact: Snaggable) = {
-    getLog.info(artifact.gav.toString)
-    getLog.info("\t\t=> " + toRelative(artifact.session.snagFile, artifact.jar.getAbsolutePath))
-    getLog.info("")
-    context + 1
-  }
+  def snagArtifact(context: TreeSet[GAV], artifact: Snaggable) = {
 
-  def end(context: Int) {
-    getLog.info("------------------------------------------------------------------------")
-    getLog.info("# Artifacts: " + context)
-  }
-
-  def toRelative(basedir: File, absolutePath: String) = {
-    val rightSlashPath = absolutePath.replace('\\', '/')
-    val basedirPath = basedir.getAbsolutePath.replace('\\', '/')
-    if (rightSlashPath.startsWith(basedirPath)) {
-      val fromBasePath = rightSlashPath.substring(basedirPath.length)
-      val noSlash =
-        if (fromBasePath.startsWith("/")) {
-          fromBasePath.substring(1)
-        } else {
-          fromBasePath
-        }
-
-      if (noSlash.length() <= 0) {
-        "."
-      } else {
-        noSlash
-      }
-
+    if (context.contains(artifact.gav)) {
+      getLog.info("[to-remote] artifact already deployed: " + artifact.gav.toString)
+      context
     } else {
-      rightSlashPath
+      getLog.info(artifact.gav.toString)
+
+      deploy(artifact, listener)
+
+      context + artifact.gav
     }
   }
+
+  def end(context: TreeSet[GAV]) {}
 }

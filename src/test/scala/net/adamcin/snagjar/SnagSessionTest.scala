@@ -25,7 +25,7 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.maven.snagjar
+package net.adamcin.snagjar
 
 import org.scalatest.FunSuite
 import org.junit.runner.RunWith
@@ -33,6 +33,7 @@ import org.scalatest.junit.JUnitRunner
 import java.io.File
 import org.slf4j.{Logger, LoggerFactory}
 import scalax.io.Resource
+import net.adamcin.snagjar.{SnagSession, Snaggable, GAV}
 
 /**
  *
