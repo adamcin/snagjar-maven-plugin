@@ -25,11 +25,12 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.snagjar
+package net.adamcin.snagjar.mojo
 
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import java.io.File
+import net.adamcin.snagjar.{SnagSession, Snaggable}
 
 /**
  * Base snagjar mojo defining common parameters and basic begin-iterate-end logic

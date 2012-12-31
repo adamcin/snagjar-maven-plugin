@@ -25,10 +25,11 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.snagjar
+package net.adamcin.snagjar.mojo
 
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.repository.{ArtifactTransferEvent, ArtifactTransferListener}
+import net.adamcin.snagjar.{Snaggable, InstallsToLocalRepository, GAV}
 
 /**
  * Installs snagged artifacts to the local maven repository

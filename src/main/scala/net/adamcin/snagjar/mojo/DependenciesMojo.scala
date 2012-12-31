@@ -25,7 +25,7 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-package net.adamcin.snagjar
+package net.adamcin.snagjar.mojo
 
 import org.apache.maven.plugins.annotations.{Parameter, Mojo}
 import java.io.File
@@ -34,6 +34,7 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 import scalax.io.Resource
 import collection.immutable.TreeSet
 import org.apache.maven.plugin.MojoExecutionException
+import net.adamcin.snagjar.{Snaggable, GAV}
 
 /**
  * Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file
