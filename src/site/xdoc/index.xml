@@ -28,7 +28,7 @@
 
 <document>
     <properties>
-        <title>scalamojo-maven-plugin</title>
+        <title>snagjar-maven-plugin</title>
     </properties>
     <body>
         <section name="snagjar-maven-plugin">
