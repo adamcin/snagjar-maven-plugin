@@ -35,6 +35,8 @@
     <googleAnalyticsAccountId>UA-37073514-1</googleAnalyticsAccountId>
     <custom>
         <fluidoSkin>
+            <facebookLike />
+            <googlePlusOne />
             <!--
             <gitHub>
                 <projectId>adamcin/scalamojo-maven-plugin</projectId>
