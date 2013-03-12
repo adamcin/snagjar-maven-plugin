@@ -31,7 +31,7 @@ import java.io.{InputStream, FileFilter, File}
 import java.util.jar.{JarFile, JarEntry}
 import scalax.io.{Resource, CloseAction}
 import java.util.{Collections, Properties}
-import collection.JavaConversions
+import collection.JavaConversions._
 import org.codehaus.plexus.util.SelectorUtils
 import org.slf4j.{Logger, LoggerFactory}
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader
@@ -169,8 +169,7 @@ object SnagSession {
     val jar = new JarFile(file)
     val opener = jarEntryOpener(jar)_
 
-    val embeddedMetas =
-      JavaConversions.enumerationAsScalaIterator(jar.entries()).filter(metaFilter)
+    val embeddedMetas = jar.entries().filter(metaFilter)
 
     val extractedMetas = embeddedMetas.map((metaEntry: JarEntry) => {
       val pomEntry = jar.getJarEntry(propsPathToPomPath(metaEntry.getName))
@@ -222,7 +221,7 @@ object SnagSession {
         val deps = modelIn match {
           case Right(model) =>
 
-            val depIt = JavaConversions.collectionAsScalaIterable(Option(model.getDependencies).getOrElse(Collections.emptyList[Dependency]))
+            val depIt = Option(model.getDependencies).getOrElse(Collections.emptyList[Dependency])
 
             depIt.map { dep => GAV(dep.getGroupId, dep.getArtifactId, dep.getVersion) }.toList
 
