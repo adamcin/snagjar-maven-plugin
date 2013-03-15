@@ -82,10 +82,12 @@
 
     <properties>
         <maven.version>3.0</maven.version>
-        <scala.version>2.9.2</scala.version>
-        <scalamojo.version>0.6.0</scalamojo.version>
-        <maven.compiler.source>1.5</maven.compiler.source>
-        <maven.compiler.target>1.5</maven.compiler.target>
+
+        <scala.version.major>2.10</scala.version.major>
+        <scala.version>2.10.0</scala.version>
+        <scalamojo.version>0.8.0</scalamojo.version>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <encoding>UTF-8</encoding>
     </properties>
 
@@ -98,10 +100,10 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.2</version>
                 <configuration>
                     <args>
-                        <arg>-target:jvm-1.5</arg>
+                        <arg>-target:jvm-1.6</arg>
                         <arg>-no-specialization</arg>
                         <arg>-deprecation</arg>
                     </args>
@@ -202,19 +204,24 @@
             <artifactId>scala-compiler</artifactId>
             <version>${scala.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
 
         <!-- Core -->
         <dependency>
             <groupId>com.github.scala-incubator.io</groupId>
-            <artifactId>scala-io-core_${scala.version}</artifactId>
-            <version>0.4.1-seq</version>
+            <artifactId>scala-io-core_${scala.version.major}</artifactId>
+            <version>0.4.1</version>
         </dependency>
 
         <!-- File -->
         <dependency>
             <groupId>com.github.scala-incubator.io</groupId>
-            <artifactId>scala-io-file_${scala.version}</artifactId>
-            <version>0.4.1-seq</version>
+            <artifactId>scala-io-file_${scala.version.major}</artifactId>
+            <version>0.4.1</version>
         </dependency>
 
         <dependency>
