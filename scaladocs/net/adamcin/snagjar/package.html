@@ -2,24 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>net.adamcin.snagjar</title>
+          <title>snagjar - Snag Jar Maven Plugin 0.7.0-SNAPSHOT API - net.adamcin.snagjar</title>
+          <meta name="description" content="snagjar - Snag Jar Maven Plugin 0.7.0 - SNAPSHOT API - net.adamcin.snagjar" />
+          <meta name="keywords" content="snagjar Snag Jar Maven Plugin 0.7.0 SNAPSHOT API net.adamcin.snagjar" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link type="text/css" media="screen" rel="stylesheet" href="../../../lib/template.css" />
-      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
       <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../../lib/template.js"></script>
       <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'net.adamcin.snagjar.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
     
         </head>
-        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+        <body class="value">
       <div id="definition">
         <img src="../../../lib/package_big.png" />
-        <p id="owner"><a name="net" class="extype" href="../../package.html">net</a>.<a name="net.adamcin" class="extype" href="../package.html">adamcin</a></p>
+        <p id="owner"><a href="../../package.html" class="extype" name="net">net</a>.<a href="../package.html" class="extype" name="net.adamcin">adamcin</a></p>
         <h1>snagjar</h1>
       </div>
 
-      <h4 class="signature" id="signature">
+      <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">package</span>
@@ -29,11 +44,11 @@
       </span>
       </h4>
       
-      <div class="fullcommenttop" id="comment"></div>
-    
+          <div id="comment" class="fullcommenttop"></div>
+        
 
       <div id="mbrsel">
-        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
         
         
         <div id="visbl">
@@ -46,9 +61,10 @@
         <div id="allMembers">
         
 
-        <div class="types members" id="types">
+        <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="net.adamcin.snagjar.AccessToRepositories" data-isabs="true">
+              <ol><li name="net.adamcin.snagjar.AccessToRepositories" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AccessToRepositoriesextendsObject"></a>
       <a id="AccessToRepositories:AccessToRepositories"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -56,11 +72,12 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="AccessToRepositories.html"><span class="name">AccessToRepositories</span></a><span class="result"> extends AnyRef</span>
+        <a href="AccessToRepositories.html"><span class="name">AccessToRepositories</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Trait defining common mojo parameters and methods useful for accessing maven repositories</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.DeploysToRemoteRepository" data-isabs="true">
+    </li><li name="net.adamcin.snagjar.DeploysToRemoteRepository" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="DeploysToRemoteRepositoryextendsAccessToRepositories"></a>
       <a id="DeploysToRemoteRepository:DeploysToRemoteRepository"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -68,12 +85,13 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="DeploysToRemoteRepository.html"><span class="name">DeploysToRemoteRepository</span></a><span class="result"> extends AccessToRepositories</span>
+        <a href="DeploysToRemoteRepository.html"><span class="name">DeploysToRemoteRepository</span></a><span class="result"> extends <a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></span>
       </span>
       </h4>
       <p class="comment cmt">Trait defining common mojo parameters and methods necessary for deployment of
 artifacts to remote repositories</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.GAV" data-isabs="false">
+    </li><li name="net.adamcin.snagjar.GAV" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GAVextendsOrdered[net.adamcin.snagjar.GAV]withProductwithSerializable"></a>
       <a id="GAV:GAV"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -81,11 +99,12 @@ artifacts to remote repositories</p>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="GAV.html"><span class="name">GAV</span></a><span class="params">(<span name="groupId">groupId: String</span>, <span name="artifactId">artifactId: String</span>, <span name="version">version: String</span>)</span><span class="result"> extends Ordered[GAV] with Product with Serializable</span>
+        <a href="GAV.html"><span class="name">GAV</span></a><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Ordered">Ordered</span>[<a href="GAV.html" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Case class representing basic maven artifact coordinates</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.InstallsToLocalRepository" data-isabs="true">
+    </li><li name="net.adamcin.snagjar.InstallsToLocalRepository" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="InstallsToLocalRepositoryextendsAccessToRepositories"></a>
       <a id="InstallsToLocalRepository:InstallsToLocalRepository"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -93,12 +112,13 @@ artifacts to remote repositories</p>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="InstallsToLocalRepository.html"><span class="name">InstallsToLocalRepository</span></a><span class="result"> extends AccessToRepositories</span>
+        <a href="InstallsToLocalRepository.html"><span class="name">InstallsToLocalRepository</span></a><span class="result"> extends <a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></span>
       </span>
       </h4>
       <p class="comment cmt">Trait defining common mojo parameters and methods necessary for installation
 of maven artifacts to local repositories</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.SnagSession" data-isabs="false">
+    </li><li name="net.adamcin.snagjar.SnagSession" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SnagSessionextendsObject"></a>
       <a id="SnagSession:SnagSession"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -106,11 +126,12 @@ of maven artifacts to local repositories</p>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="SnagSession.html"><span class="name">SnagSession</span></a><span class="result"> extends AnyRef</span>
+        <a href="SnagSession.html"><span class="name">SnagSession</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Class that performs the directory scanning and artifact snagging</p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.Snaggable" data-isabs="false">
+    </li><li name="net.adamcin.snagjar.Snaggable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SnaggableextendsObject"></a>
       <a id="Snaggable:Snaggable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -118,7 +139,7 @@ of maven artifacts to local repositories</p>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Snaggable.html"><span class="name">Snaggable</span></a><span class="result"> extends AnyRef</span>
+        <a href="Snaggable.html"><span class="name">Snaggable</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Simple class representing a discovered jar, its maven coordinates, and its pom file</p>
@@ -127,9 +148,10 @@ of maven artifacts to local repositories</p>
 
         
 
-        <div class="values members" id="values">
+        <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="net.adamcin.snagjar.SnagSession" data-isabs="false">
+              <ol><li name="net.adamcin.snagjar.SnagSession" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SnagSession"></a>
       <a id="SnagSession:SnagSession"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -137,11 +159,12 @@ of maven artifacts to local repositories</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="SnagSession$.html"><span class="name">SnagSession</span></a><span class="result"> extends AnyRef</span>
+        <a href="SnagSession$.html"><span class="name">SnagSession</span></a>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="net.adamcin.snagjar.Snaggable" data-isabs="false">
+    </li><li name="net.adamcin.snagjar.Snaggable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Snaggable"></a>
       <a id="Snaggable:Snaggable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -149,12 +172,13 @@ of maven artifacts to local repositories</p>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Snaggable$.html"><span class="name">Snaggable</span></a><span class="result"> extends AnyRef</span>
+        <a href="Snaggable$.html"><span class="name">Snaggable</span></a>
       </span>
       </h4>
       <p class="comment cmt">Companion class defining a convenient apply method
 </p>
-    </li><li visbl="pub" name="net.adamcin.snagjar.mojo" data-isabs="false">
+    </li><li name="net.adamcin.snagjar.mojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="mojo"></a>
       <a id="mojo:mojo"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -170,10 +194,20 @@ of maven artifacts to local repositories</p>
             </div>
 
         
+
+        
         </div>
 
         <div id="inheritedMembers">
         
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
         </div>
 
       </div>
