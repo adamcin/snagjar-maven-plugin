@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>InstallsToLocalRepository - Snag Jar Maven Plugin 0.7.0-SNAPSHOT API - net.adamcin.snagjar.InstallsToLocalRepository</title>
-          <meta name="description" content="InstallsToLocalRepository - Snag Jar Maven Plugin 0.7.0 - SNAPSHOT API - net.adamcin.snagjar.InstallsToLocalRepository" />
-          <meta name="keywords" content="InstallsToLocalRepository Snag Jar Maven Plugin 0.7.0 SNAPSHOT API net.adamcin.snagjar.InstallsToLocalRepository" />
+          <title>InstallsToLocalRepository - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar.InstallsToLocalRepository</title>
+          <meta name="description" content="InstallsToLocalRepository - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar.InstallsToLocalRepository" />
+          <meta name="keywords" content="InstallsToLocalRepository Snag Jar Maven Plugin 0.8.2 API net.adamcin.snagjar.InstallsToLocalRepository" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -230,6 +230,22 @@ of maven artifacts to local repositories</p></div><dl class="attributes block"> 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="net.adamcin.snagjar.AccessToRepositories#generatePoms" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="generatePoms:Boolean"></a>
+      <a id="generatePoms:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">generatePoms</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Specify true to install generated &quot;jar&quot; poms, which omit dependencies and
+parent pom references</p><div class="fullcomment"><div class="comment cmt"><p>Specify true to install generated &quot;jar&quot; poms, which omit dependencies and
+parent pom references</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></dd><dt>Since</dt><dd><p>0.8.2
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -430,15 +446,15 @@ Refer to maven-install-plugin:install-file
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></dd></dl></div>
     </li><li name="net.adamcin.snagjar.AccessToRepositories#snaggableToArtifact" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="snaggableToArtifact(s:net.adamcin.snagjar.Snaggable):(org.apache.maven.artifact.Artifact,org.apache.maven.artifact.metadata.ArtifactMetadata)"></a>
-      <a id="snaggableToArtifact(Snaggable):(Artifact,ArtifactMetadata)"></a>
+      <a id="snaggableToArtifact(s:net.adamcin.snagjar.Snaggable):(org.apache.maven.artifact.Artifact,org.apache.maven.project.artifact.ProjectArtifactMetadata)"></a>
+      <a id="snaggableToArtifact(Snaggable):(Artifact,ProjectArtifactMetadata)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">snaggableToArtifact</span><span class="params">(<span name="s">s: <a href="Snaggable.html" class="extype" name="net.adamcin.snagjar.Snaggable">Snaggable</a></span>)</span><span class="result">: (<span class="extype" name="org.apache.maven.artifact.Artifact">Artifact</span>, <span class="extype" name="org.apache.maven.artifact.metadata.ArtifactMetadata">ArtifactMetadata</span>)</span>
+        <span class="name">snaggableToArtifact</span><span class="params">(<span name="s">s: <a href="Snaggable.html" class="extype" name="net.adamcin.snagjar.Snaggable">Snaggable</a></span>)</span><span class="result">: (<span class="extype" name="org.apache.maven.artifact.Artifact">Artifact</span>, <span class="extype" name="org.apache.maven.project.artifact.ProjectArtifactMetadata">ProjectArtifactMetadata</span>)</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></dd></dl></div>
