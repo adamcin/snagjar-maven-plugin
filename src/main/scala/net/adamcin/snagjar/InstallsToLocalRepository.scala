@@ -28,6 +28,7 @@
 package net.adamcin.snagjar
 
 import java.io.File
+import org.apache.maven.plugin.logging.Log
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
@@ -53,18 +54,18 @@ trait InstallsToLocalRepository extends AccessToRepositories {
       case None => repositorySystem.createDefaultLocalRepository()
     }
 
-  def install(artifact: Snaggable, listener: ArtifactTransferListener ) {
+  def install(artifact: Snaggable, listener: ArtifactTransferListener) {
     val (m2artifact, m2meta) = snaggableToArtifact(artifact)
 
     repositorySystem.publish(
       localRepository,
-      artifact.jar,
+      m2artifact.getFile,
       localRepository.getLayout.pathOf(m2artifact),
       listener)
 
     repositorySystem.publish(
       localRepository,
-      artifact.pom,
+      m2meta.getFile,
       localRepository.getLayout.pathOfLocalRepositoryMetadata(m2meta, localRepository),
       listener)
   }

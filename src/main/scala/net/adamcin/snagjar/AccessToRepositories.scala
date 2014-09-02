@@ -66,6 +66,14 @@ trait AccessToRepositories {
   @Parameter(property = "repositoryLayout")
   val repositoryLayout: String = null
 
+  /**
+   * Specify true to install generated "jar" poms, which omit dependencies and
+   * parent pom references
+   * @since 0.8.2
+   */
+  @Parameter(property = "generatePoms")
+  val generatePoms: Boolean = false
+
   // -----------------------------------------------
   // Members
   // -----------------------------------------------
@@ -82,8 +90,9 @@ trait AccessToRepositories {
   // lazy evaluation occurs after dependency injection :)
   lazy val layout: ArtifactRepositoryLayout = repositoryLayouts.get(Option(repositoryLayout).getOrElse("default"))
 
-  def snaggableToArtifact(s: Snaggable): (Artifact, ArtifactMetadata) = {
+  def snaggableToArtifact(s: Snaggable): (Artifact, ProjectArtifactMetadata) = {
     val a = repositorySystem.createArtifact(s.gav.groupId, s.gav.artifactId, s.gav.version, "jar")
-    (a, new ProjectArtifactMetadata(a, s.pom))
+    a.setFile(s.jar)
+    (a, new ProjectArtifactMetadata(a, if (generatePoms) s.genPom else s.pom))
   }
 }

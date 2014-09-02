@@ -67,13 +67,13 @@ trait DeploysToRemoteRepository extends AccessToRepositories {
 
       repositorySystem.publish(
         remoteRepository,
-        artifact.jar,
+        m2artifact.getFile,
         remoteRepository.getLayout.pathOf(m2artifact),
         listener)
 
       repositorySystem.publish(
         remoteRepository,
-        artifact.pom,
+        m2meta.getFile,
         remoteRepository.getLayout.pathOfRemoteRepositoryMetadata(m2meta),
         listener)
   }
