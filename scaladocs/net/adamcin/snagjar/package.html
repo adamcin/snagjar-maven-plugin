@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>snagjar - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar</title>
-          <meta name="description" content="snagjar - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar" />
-          <meta name="keywords" content="snagjar Snag Jar Maven Plugin 0.8.2 API net.adamcin.snagjar" />
+          <title>snagjar - Snag Jar Maven Plugin 0.9.0-SNAPSHOT API - net.adamcin.snagjar</title>
+          <meta name="description" content="snagjar - Snag Jar Maven Plugin 0.9.0 - SNAPSHOT API - net.adamcin.snagjar" />
+          <meta name="keywords" content="snagjar Snag Jar Maven Plugin 0.9.0 SNAPSHOT API net.adamcin.snagjar" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -29,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../lib/package_big.png" />
+        <img alt="Package" src="../../../lib/package_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="net">net</a>.<a href="../package.html" class="extype" name="net.adamcin">adamcin</a></p>
-        <h1>snagjar</h1>
+        <h1>snagjar</h1><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -63,8 +66,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="net.adamcin.snagjar.AccessToRepositories" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="AccessToRepositoriesextendsObject"></a>
+              <ol><li name="net.adamcin.snagjar.AccessToRepositories" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AccessToRepositoriesextendsAnyRef"></a>
       <a id="AccessToRepositories:AccessToRepositories"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -74,9 +77,13 @@
       <span class="symbol">
         <a href="AccessToRepositories.html"><span class="name">AccessToRepositories</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Trait defining common mojo parameters and methods useful for accessing maven repositories</p>
-    </li><li name="net.adamcin.snagjar.DeploysToRemoteRepository" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@AccessToRepositoriesextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Trait defining common mojo parameters and methods useful for accessing maven repositories</p><div class="fullcomment"><div class="comment cmt"><p>Trait defining common mojo parameters and methods useful for accessing maven repositories</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.DeploysToRemoteRepository" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="DeploysToRemoteRepositoryextendsAccessToRepositories"></a>
       <a id="DeploysToRemoteRepository:DeploysToRemoteRepository"></a>
       <h4 class="signature">
@@ -87,10 +94,15 @@
       <span class="symbol">
         <a href="DeploysToRemoteRepository.html"><span class="name">DeploysToRemoteRepository</span></a><span class="result"> extends <a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Trait defining common mojo parameters and methods necessary for deployment of
-artifacts to remote repositories</p>
-    </li><li name="net.adamcin.snagjar.GAV" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@DeploysToRemoteRepositoryextendsAccessToRepositories" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Trait defining common mojo parameters and methods necessary for deployment of
+artifacts to remote repositories</p><div class="fullcomment"><div class="comment cmt"><p>Trait defining common mojo parameters and methods necessary for deployment of
+artifacts to remote repositories</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.GAV" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GAVextendsOrdered[net.adamcin.snagjar.GAV]withProductwithSerializable"></a>
       <a id="GAV:GAV"></a>
       <h4 class="signature">
@@ -101,9 +113,13 @@ artifacts to remote repositories</p>
       <span class="symbol">
         <a href="GAV.html"><span class="name">GAV</span></a><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Ordered">Ordered</span>[<a href="GAV.html" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Case class representing basic maven artifact coordinates</p>
-    </li><li name="net.adamcin.snagjar.InstallsToLocalRepository" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@GAVextendsOrdered[net.adamcin.snagjar.GAV]withProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Case class representing basic maven artifact coordinates</p><div class="fullcomment"><div class="comment cmt"><p>Case class representing basic maven artifact coordinates</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.InstallsToLocalRepository" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="InstallsToLocalRepositoryextendsAccessToRepositories"></a>
       <a id="InstallsToLocalRepository:InstallsToLocalRepository"></a>
       <h4 class="signature">
@@ -114,11 +130,16 @@ artifacts to remote repositories</p>
       <span class="symbol">
         <a href="InstallsToLocalRepository.html"><span class="name">InstallsToLocalRepository</span></a><span class="result"> extends <a href="AccessToRepositories.html" class="extype" name="net.adamcin.snagjar.AccessToRepositories">AccessToRepositories</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Trait defining common mojo parameters and methods necessary for installation
-of maven artifacts to local repositories</p>
-    </li><li name="net.adamcin.snagjar.SnagSession" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SnagSessionextendsObject"></a>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@InstallsToLocalRepositoryextendsAccessToRepositories" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Trait defining common mojo parameters and methods necessary for installation
+of maven artifacts to local repositories</p><div class="fullcomment"><div class="comment cmt"><p>Trait defining common mojo parameters and methods necessary for installation
+of maven artifacts to local repositories</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.SnagSession" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SnagSessionextendsAnyRef"></a>
       <a id="SnagSession:SnagSession"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -128,10 +149,14 @@ of maven artifacts to local repositories</p>
       <span class="symbol">
         <a href="SnagSession.html"><span class="name">SnagSession</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Class that performs the directory scanning and artifact snagging</p>
-    </li><li name="net.adamcin.snagjar.Snaggable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SnaggableextendsObject"></a>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@SnagSessionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Class that performs the directory scanning and artifact snagging</p><div class="fullcomment"><div class="comment cmt"><p>Class that performs the directory scanning and artifact snagging</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.Snaggable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SnaggableextendsAnyRef"></a>
       <a id="Snaggable:Snaggable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -141,8 +166,12 @@ of maven artifacts to local repositories</p>
       <span class="symbol">
         <a href="Snaggable.html"><span class="name">Snaggable</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Simple class representing a discovered jar, its maven coordinates, and its pom file</p>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@SnaggableextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Simple class representing a discovered jar, its maven coordinates, and its pom file</p><div class="fullcomment"><div class="comment cmt"><p>Simple class representing a discovered jar, its maven coordinates, and its pom file</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -161,7 +190,11 @@ of maven artifacts to local repositories</p>
       <span class="symbol">
         <a href="SnagSession$.html"><span class="name">SnagSession</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@SnagSession" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li><li name="net.adamcin.snagjar.Snaggable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Snaggable"></a>
@@ -174,8 +207,12 @@ of maven artifacts to local repositories</p>
       <span class="symbol">
         <a href="Snaggable$.html"><span class="name">Snaggable</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion class defining a convenient apply method
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@Snaggable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion class defining a convenient apply method
 </p>
     </li><li name="net.adamcin.snagjar.mojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="mojo"></a>
@@ -188,7 +225,11 @@ of maven artifacts to local repositories</p>
       <span class="symbol">
         <a href="mojo/package.html"><span class="name">mojo</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.package@mojo" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li></ol>
             </div>

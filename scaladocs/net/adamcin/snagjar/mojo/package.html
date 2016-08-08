@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>mojo - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar.mojo</title>
-          <meta name="description" content="mojo - Snag Jar Maven Plugin 0.8.2 API - net.adamcin.snagjar.mojo" />
-          <meta name="keywords" content="mojo Snag Jar Maven Plugin 0.8.2 API net.adamcin.snagjar.mojo" />
+          <title>mojo - Snag Jar Maven Plugin 0.9.0-SNAPSHOT API - net.adamcin.snagjar.mojo</title>
+          <meta name="description" content="mojo - Snag Jar Maven Plugin 0.9.0 - SNAPSHOT API - net.adamcin.snagjar.mojo" />
+          <meta name="keywords" content="mojo Snag Jar Maven Plugin 0.9.0 SNAPSHOT API net.adamcin.snagjar.mojo" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -29,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../../lib/package_big.png" />
+        <img alt="Package" src="../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="net">net</a>.<a href="../../package.html" class="extype" name="net.adamcin">adamcin</a>.<a href="../package.html" class="extype" name="net.adamcin.snagjar">snagjar</a></p>
-        <h1>mojo</h1>
+        <h1>mojo</h1><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -63,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="AbstractSnagJarMojo[SnagContext]extendsAbstractMojo"></a>
       <a id="AbstractSnagJarMojo[SnagContext]:AbstractSnagJarMojo[SnagContext]"></a>
       <h4 class="signature">
@@ -74,9 +77,13 @@
       <span class="symbol">
         <a href="AbstractSnagJarMojo.html"><span class="name">AbstractSnagJarMojo</span></a><span class="tparams">[<span name="SnagContext">SnagContext</span>]</span><span class="result"> extends <span class="extype" name="org.apache.maven.plugin.AbstractMojo">AbstractMojo</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base snagjar mojo defining common parameters and basic begin-iterate-end logic</p>
-    </li><li name="net.adamcin.snagjar.mojo.DependenciesMojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@AbstractSnagJarMojo[SnagContext]extendsAbstractMojo" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base snagjar mojo defining common parameters and basic begin-iterate-end logic</p><div class="fullcomment"><div class="comment cmt"><p>Base snagjar mojo defining common parameters and basic begin-iterate-end logic</p></div><dl class="attributes block"> <dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.mojo.DependenciesMojo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="DependenciesMojoextendsAbstractSnagJarMojo[scala.collection.immutable.TreeSet[net.adamcin.snagjar.GAV]]"></a>
       <a id="DependenciesMojo:DependenciesMojo"></a>
       <h4 class="signature">
@@ -87,9 +94,16 @@
       <span class="symbol">
         <a href="DependenciesMojo.html"><span class="name">DependenciesMojo</span></a><span class="result"> extends <a href="AbstractSnagJarMojo.html" class="extype" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo">AbstractSnagJarMojo</a>[<span class="extype" name="scala.collection.immutable.TreeSet">TreeSet</span>[<a href="../GAV.html" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>]]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file</&gt;</&lt;</p>
-    </li><li name="net.adamcin.snagjar.mojo.DeployMojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@DependenciesMojoextendsAbstractSnagJarMojo[scala.collection.immutable.TreeSet[net.adamcin.snagjar.GAV]]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file</p><div class="fullcomment"><div class="comment cmt"><p>Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Mojo</span><span class="args">()</span>
+              
+        </dd><dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.mojo.DeployMojo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="DeployMojoextendsAbstractSnagJarMojo[scala.collection.immutable.TreeSet[net.adamcin.snagjar.GAV]]withDeploysToRemoteRepository"></a>
       <a id="DeployMojo:DeployMojo"></a>
       <h4 class="signature">
@@ -100,8 +114,15 @@
       <span class="symbol">
         <a href="DeployMojo.html"><span class="name">DeployMojo</span></a><span class="result"> extends <a href="AbstractSnagJarMojo.html" class="extype" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo">AbstractSnagJarMojo</a>[<span class="extype" name="scala.collection.immutable.TreeSet">TreeSet</span>[<a href="../GAV.html" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>]] with <a href="../DeploysToRemoteRepository.html" class="extype" name="net.adamcin.snagjar.DeploysToRemoteRepository">DeploysToRemoteRepository</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Deploy snagged artifacts to a remote maven repository</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@DeployMojoextendsAbstractSnagJarMojo[scala.collection.immutable.TreeSet[net.adamcin.snagjar.GAV]]withDeploysToRemoteRepository" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Deploy snagged artifacts to a remote maven repository</p><div class="fullcomment"><div class="comment cmt"><p>Deploy snagged artifacts to a remote maven repository</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Mojo</span><span class="args">()</span>
+              
+        </dd><dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
     </li><li name="net.adamcin.snagjar.mojo.HelpMojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="HelpMojoextendsAbstractMojo"></a>
       <a id="HelpMojo:HelpMojo"></a>
@@ -113,9 +134,13 @@
       <span class="symbol">
         <a href="HelpMojo.html"><span class="name">HelpMojo</span></a><span class="result"> extends <span class="extype" name="org.apache.maven.plugin.AbstractMojo">AbstractMojo</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@HelpMojoextendsAbstractMojo" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
-    </li><li name="net.adamcin.snagjar.mojo.InstallMojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="net.adamcin.snagjar.mojo.InstallMojo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="InstallMojoextendsAbstractSnagJarMojo[Set[net.adamcin.snagjar.GAV]]withInstallsToLocalRepository"></a>
       <a id="InstallMojo:InstallMojo"></a>
       <h4 class="signature">
@@ -126,9 +151,16 @@
       <span class="symbol">
         <a href="InstallMojo.html"><span class="name">InstallMojo</span></a><span class="result"> extends <a href="AbstractSnagJarMojo.html" class="extype" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo">AbstractSnagJarMojo</a>[<span class="extype" name="scala.Predef.Set">Set</span>[<a href="../GAV.html" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>]] with <a href="../InstallsToLocalRepository.html" class="extype" name="net.adamcin.snagjar.InstallsToLocalRepository">InstallsToLocalRepository</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">Installs snagged artifacts to the local maven repository</p>
-    </li><li name="net.adamcin.snagjar.mojo.LogMojo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@InstallMojoextendsAbstractSnagJarMojo[Set[net.adamcin.snagjar.GAV]]withInstallsToLocalRepository" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Installs snagged artifacts to the local maven repository</p><div class="fullcomment"><div class="comment cmt"><p>Installs snagged artifacts to the local maven repository</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Mojo</span><span class="args">()</span>
+              
+        </dd><dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
+    </li><li name="net.adamcin.snagjar.mojo.LogMojo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="LogMojoextendsAbstractSnagJarMojo[Int]"></a>
       <a id="LogMojo:LogMojo"></a>
       <h4 class="signature">
@@ -139,8 +171,15 @@
       <span class="symbol">
         <a href="LogMojo.html"><span class="name">LogMojo</span></a><span class="result"> extends <a href="AbstractSnagJarMojo.html" class="extype" name="net.adamcin.snagjar.mojo.AbstractSnagJarMojo">AbstractSnagJarMojo</a>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Mojo that writes all snagged artifacts to the maven execution log</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#net.adamcin.snagjar.mojo.package@LogMojoextendsAbstractSnagJarMojo[Int]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Mojo that writes all snagged artifacts to the maven execution log</p><div class="fullcomment"><div class="comment cmt"><p>Mojo that writes all snagged artifacts to the maven execution log</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Mojo</span><span class="args">()</span>
+              
+        </dd><dt>Since</dt><dd><p>0.8.0</p></dd></dl></div>
     </li></ol>
             </div>
 
