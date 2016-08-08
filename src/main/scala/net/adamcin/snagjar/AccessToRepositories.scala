@@ -47,7 +47,7 @@ trait AccessToRepositories {
   // -----------------------------------------------
   // Injected Maven Components
   // -----------------------------------------------
-  @Component
+  @Parameter(defaultValue = "${settings}", readonly = true)
   var settings: Settings = null
 
   @Component
