@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>GAV - Snag Jar Maven Plugin 1.0.0 API - net.adamcin.snagjar.GAV</title>
-          <meta name="description" content="GAV - Snag Jar Maven Plugin 1.0.0 API - net.adamcin.snagjar.GAV" />
-          <meta name="keywords" content="GAV Snag Jar Maven Plugin 1.0.0 API net.adamcin.snagjar.GAV" />
+          <title>GAV - Snag Jar Maven Plugin 1.2.0 API - net.adamcin.snagjar.GAV</title>
+          <meta name="description" content="GAV - Snag Jar Maven Plugin 1.2.0 API - net.adamcin.snagjar.GAV" />
+          <meta name="keywords" content="GAV Snag Jar Maven Plugin 1.2.0 API net.adamcin.snagjar.GAV" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -45,7 +45,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">GAV</span><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Ordered">Ordered</span>[<a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">GAV</span><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="parent">parent: <span class="extype" name="scala.Option">Option</span>[<a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Ordered">Ordered</span>[<a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -89,7 +89,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="net.adamcin.snagjar.GAV#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(groupId:String,artifactId:String,version:String):net.adamcin.snagjar.GAV"></a>
+      <a id="&lt;init&gt;(groupId:String,artifactId:String,version:String,parent:Option[net.adamcin.snagjar.GAV]):net.adamcin.snagjar.GAV"></a>
       <a id="&lt;init&gt;:GAV"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,10 +97,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">GAV</span><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
+        <span class="name">GAV</span><span class="params">(<span name="groupId">groupId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="artifactId">artifactId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="parent">parent: <span class="extype" name="scala.Option">Option</span>[<a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>] = <span class="symbol">None</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#net.adamcin.snagjar.GAV@&lt;init&gt;(groupId:String,artifactId:String,version:String):net.adamcin.snagjar.GAV" title="Permalink" target="_top">
+      <a href="../../../index.html#net.adamcin.snagjar.GAV@&lt;init&gt;(groupId:String,artifactId:String,version:String,parent:Option[net.adamcin.snagjar.GAV]):net.adamcin.snagjar.GAV" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -517,6 +517,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="net.adamcin.snagjar.GAV#parent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="parent:Option[net.adamcin.snagjar.GAV]"></a>
+      <a id="parent:Option[GAV]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parent</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.GAV@parent:Option[net.adamcin.snagjar.GAV]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="net.adamcin.snagjar.GAV#parsedVersion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="parsedVersion:org.apache.maven.artifact.versioning.DefaultArtifactVersion"></a>
       <a id="parsedVersion:DefaultArtifactVersion"></a>
@@ -551,6 +568,23 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="net.adamcin.snagjar.GAV#toSnapshot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toSnapshot():net.adamcin.snagjar.GAV"></a>
+      <a id="toSnapshot():GAV"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toSnapshot</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="net.adamcin.snagjar.GAV">GAV</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.adamcin.snagjar.GAV@toSnapshot():net.adamcin.snagjar.GAV" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a snapshot version of the GAV to support transient pom generation</p></dd></dl><dl class="attributes block"> <dt>Since</dt><dd><p>1.2.0</p></dd></dl></div>
     </li><li name="net.adamcin.snagjar.GAV#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString:String"></a>
       <a id="toString:String"></a>
