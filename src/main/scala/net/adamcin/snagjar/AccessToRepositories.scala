@@ -27,15 +27,20 @@
 
 package net.adamcin.snagjar
 
-import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy
-import org.apache.maven.plugins.annotations.{Parameter, Component}
+import java.io.File
+
+import org.apache.maven.artifact.repository.{ArtifactRepository, ArtifactRepositoryPolicy, DefaultRepositoryRequest, RepositoryRequest}
+import org.apache.maven.plugins.annotations.{Component, Parameter}
 import org.apache.maven.repository.RepositorySystem
 import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout
 import org.apache.maven.settings.Settings
+
 import scala.Option
 import org.apache.maven.project.artifact.ProjectArtifactMetadata
 import org.apache.maven.artifact.metadata.ArtifactMetadata
 import org.apache.maven.artifact.Artifact
+import org.apache.maven.artifact.resolver.ArtifactResolutionRequest
+import org.apache.maven.execution.MavenSession
 
 /**
  * Trait defining common mojo parameters and methods useful for accessing maven repositories
@@ -49,6 +54,9 @@ trait AccessToRepositories {
   // -----------------------------------------------
   @Parameter(defaultValue = "${settings}", readonly = true)
   var settings: Settings = null
+
+  @Parameter(defaultValue = "${session}", readonly = true)
+  var session: MavenSession = null
 
   @Component
   var repositorySystem: RepositorySystem = null
@@ -67,12 +75,31 @@ trait AccessToRepositories {
   val repositoryLayout: String = null
 
   /**
-   * Specify true to install generated "jar" poms, which omit dependencies and
-   * parent pom references
-   * @since 0.8.2
+   * Specify true to install generated "jar" pom when a parent pom is unresolvable,
+   * which omits dependencies and the parent pom reference
+   * @since 1.2.0
    */
   @Parameter(property = "generatePoms")
   val generatePoms: Boolean = false
+
+  /**
+   * Specify the local repository path
+   * Refer to maven-install-plugin:install-file
+   */
+  @Parameter(property = "localRepositoryPath")
+  val localRepositoryPath: File = null
+
+  lazy val localRepository: ArtifactRepository =
+    Option(localRepositoryPath) match {
+      case Some(path) => repositorySystem.createLocalRepository(path)
+      case None => repositorySystem.createDefaultLocalRepository()
+    }
+
+  lazy val repositoryRequest: RepositoryRequest = {
+    val request = DefaultRepositoryRequest.getRepositoryRequest(session, null)
+    request.setLocalRepository(localRepository)
+    request
+  }
 
   // -----------------------------------------------
   // Members
@@ -93,6 +120,16 @@ trait AccessToRepositories {
   def snaggableToArtifact(s: Snaggable): (Artifact, ProjectArtifactMetadata) = {
     val a = repositorySystem.createArtifact(s.gav.groupId, s.gav.artifactId, s.gav.version, "jar")
     a.setFile(s.jar)
-    (a, new ProjectArtifactMetadata(a, if (generatePoms) s.genPom else s.pom))
+    (a, new ProjectArtifactMetadata(a, s.pom))
+  }
+
+  def isResolvable(s: Snaggable): Boolean = {
+    s.gav.parent.forall { parentGav =>
+      val parentArtifact = repositorySystem.createProjectArtifact(
+        parentGav.groupId, parentGav.artifactId, parentGav.version)
+      val request = new ArtifactResolutionRequest(repositoryRequest)
+      request.setArtifact(parentArtifact)
+      repositorySystem.resolve(request).isSuccess
+    }
   }
 }

@@ -171,6 +171,7 @@ object SnagSession {
 
     val embeddedMetas = jar.entries().filter(metaFilter)
 
+    val reader = new MavenXpp3Reader
     val extractedMetas = embeddedMetas.map((metaEntry: JarEntry) => {
       val pomEntry = jar.getJarEntry(propsPathToPomPath(metaEntry.getName))
       val gav =
@@ -181,14 +182,20 @@ object SnagSession {
         case (Some(meta), Some(je)) => {
           val pom = session.createTempFile
           Resource.fromFile(pom).doCopyFrom(Resource.fromInputStream(opener(pomEntry)))
-          (meta, pom)
+          val modelIn = Resource.fromFile(pom).inputStream acquireFor { reader.read }
+
+          val parentGAV = modelIn.right.toOption.flatMap { model => Option(model.getParent) }.map { parentEl =>
+            GAV(groupId = parentEl.getGroupId, artifactId = parentEl.getArtifactId, version = parentEl.getVersion)
+          }
+
+          (meta.copy(parent = parentGAV), pom)
         }
         case _ => null
       }
     }).toList
 
     // partial function application FTW!!!
-    val extractor = extractDependencies(new MavenXpp3Reader)_
+    val extractor = extractDependencies(reader)_
 
     val allDeps: Set[GAV] = extractedMetas.filter {
 
@@ -210,13 +217,11 @@ object SnagSession {
     }
   }
 
-  def applyReader(modelReader: MavenXpp3Reader)(in: InputStream): Model = modelReader.read(in)
-
   def extractDependencies(modelReader: MavenXpp3Reader)(extractedMeta: (GAV, File)): (GAV, File, List[GAV]) =
     extractedMeta match {
       case (gav: GAV, pom: File) => {
 
-        val modelIn = Resource.fromFile(pom).inputStream acquireFor { applyReader(modelReader)_ }
+        val modelIn = Resource.fromFile(pom).inputStream acquireFor { modelReader.read }
 
         val deps = modelIn match {
           case Right(model) =>

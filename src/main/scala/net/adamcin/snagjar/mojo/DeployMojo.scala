@@ -67,16 +67,29 @@ class DeployMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with DeploysToRemoteR
   def begin() = TreeSet.empty[GAV]
 
   def snagArtifact(context: TreeSet[GAV], artifact: Snaggable) = {
-
-    if (context.contains(artifact.gav)) {
-      getLog.info("artifact already deployed: " + artifact.gav.toString)
-      context
+    if (isResolvable(artifact)) {
+      if (context.contains(artifact.gav)) {
+        getLog.info("artifact already deployed: " + artifact.gav.toString)
+        context
+      } else {
+        getLog.info(artifact.gav.toString)
+        deploy(artifact, listener)
+        context + artifact.gav
+      }
+    } else if (generatePoms) {
+      val generated = artifact.toGenerated()
+      getLog.info(s"Generating pom for artifact: ${artifact.gav} -> ${generated.gav}")
+      if (context.contains(generated.gav)) {
+        getLog.info("artifact already deployed: " + generated.gav.toString)
+        context
+      } else {
+        getLog.info(generated.gav.toString)
+        deploy(generated, listener)
+        context + generated.gav
+      }
     } else {
-      getLog.info(artifact.gav.toString)
-
-      deploy(artifact, listener)
-
-      context + artifact.gav
+      getLog.info(s"Skipping artifact with unresolvable parent pom: ${artifact.gav} -> ${artifact.gav.parent}")
+      context
     }
   }
 

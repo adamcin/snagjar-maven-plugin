@@ -36,10 +36,8 @@ import org.apache.maven.artifact.versioning.DefaultArtifactVersion
  */
 case class GAV(groupId: String,
                artifactId: String,
-               version: String)
+               version: String, parent: Option[GAV] = None)
   extends Ordered[GAV] {
-
-  // TODO Create subtypes to indicate confidence and/or completeness of GAV information
 
   val parsedVersion = Option(version) match {
     case Some(v) => new DefaultArtifactVersion(version)
@@ -60,6 +58,15 @@ case class GAV(groupId: String,
     if (a == 0) {
       this.parsedVersion compareTo that.parsedVersion
     } else a
+  }
+
+  /**
+    * @since 1.2.0
+    * @return a snapshot version of the GAV to support transient pom generation
+    */
+  def toSnapshot(): GAV = {
+
+    this.copy(version = this.version.split("-")(0)+"-SNAPSHOT", parent = None)
   }
 
   def min(that: GAV) = if (this < that) this else that

@@ -70,15 +70,29 @@ class InstallMojo extends AbstractSnagJarMojo[Set[GAV]] with InstallsToLocalRepo
   def begin() = Set.empty[GAV]
 
   def snagArtifact(context: Set[GAV], artifact: Snaggable) = {
-    if (context.contains(artifact.gav)) {
-      getLog.info("artifact already installed: " + artifact.gav.toString)
-      context
+    if (isResolvable(artifact)) {
+      if (context.contains(artifact.gav)) {
+        getLog.info("artifact already installed: " + artifact.gav.toString)
+        context
+      } else {
+        getLog.info(artifact.gav.toString)
+        install(artifact, listener)
+        context + artifact.gav
+      }
+    } else if (generatePoms) {
+      val generated = artifact.toGenerated()
+      getLog.info(s"Generating pom for artifact: ${artifact.gav} -> ${generated.gav}")
+      if (context.contains(generated.gav)) {
+        getLog.info("artifact already installed: " + generated.gav.toString)
+        context
+      } else {
+        getLog.info(generated.gav.toString)
+        install(generated, listener)
+        context + generated.gav
+      }
     } else {
-      getLog.info(artifact.gav.toString)
-
-      install(artifact, listener)
-
-      context + artifact.gav
+      getLog.info(s"Skipping artifact with unresolvable parent pom: ${artifact.gav} -> ${artifact.gav.parent}")
+      context
     }
   }
 

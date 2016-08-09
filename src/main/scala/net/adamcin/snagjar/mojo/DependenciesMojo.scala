@@ -27,14 +27,16 @@
 
 package net.adamcin.snagjar.mojo
 
-import org.apache.maven.plugins.annotations.{Parameter, Mojo}
+import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 import java.io.File
+
 import org.apache.maven.model.{Dependency, DependencyManagement, Model}
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
+
 import scalax.io.Resource
 import collection.immutable.TreeSet
 import org.apache.maven.plugin.MojoExecutionException
-import net.adamcin.snagjar.{Snaggable, GAV}
+import net.adamcin.snagjar.{AccessToRepositories, GAV, Snaggable}
 
 /**
  * Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file
@@ -42,7 +44,7 @@ import net.adamcin.snagjar.{Snaggable, GAV}
  * @author Mark Adamcin
  */
 @Mojo(name = "dependencies", requiresProject = false)
-class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
+class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRepositories {
 
   // -----------------------------------------------
   // Maven Parameters
@@ -81,7 +83,16 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] {
   }
 
   def snagArtifact(context: TreeSet[GAV], artifact: Snaggable) = {
-    context + artifact.gav
+    if (isResolvable(artifact)) {
+      context + artifact.gav
+    } else if (generatePoms) {
+      val generated = artifact.toGenerated()
+      getLog.info(s"Generating pom for artifact: ${artifact.gav} -> ${generated.gav}")
+      context + generated.gav
+    } else {
+      getLog.info(s"Skipping artifact with unresolvable parent pom: ${artifact.gav} -> ${artifact.gav.parent}")
+      context
+    }
   }
 
   def end(context: TreeSet[GAV]) {

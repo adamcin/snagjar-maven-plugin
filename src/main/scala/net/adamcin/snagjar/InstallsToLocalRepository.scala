@@ -41,18 +41,6 @@ import org.apache.maven.repository.ArtifactTransferListener
  */
 trait InstallsToLocalRepository extends AccessToRepositories {
 
-  /**
-   * Specify the local repository path
-   * Refer to maven-install-plugin:install-file
-   */
-  @Parameter(property = "localRepositoryPath")
-  val localRepositoryPath: File = null
-
-  lazy val localRepository: ArtifactRepository =
-    Option(localRepositoryPath) match {
-      case Some(path) => repositorySystem.createLocalRepository(path)
-      case None => repositorySystem.createDefaultLocalRepository()
-    }
 
   def install(artifact: Snaggable, listener: ArtifactTransferListener) {
     val (m2artifact, m2meta) = snaggableToArtifact(artifact)
