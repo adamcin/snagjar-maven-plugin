@@ -82,19 +82,19 @@
     </developers>
 
     <properties>
-        <maven.version>3.3.9</maven.version>
+        <maven.version>3.0</maven.version>
         <maven.plugin.tools.version>3.4</maven.plugin.tools.version>
         <scala.version.major>2.11</scala.version.major>
         <scala.version>2.11.7</scala.version>
-        <scalamojo.version>1.0.0</scalamojo.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <scalamojo.version>1.1.0</scalamojo.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
         <encoding>UTF-8</encoding>
         <github.global.server>github</github.global.server>
     </properties>
 
     <prerequisites>
-        <maven>3.3.9</maven>
+        <maven>3.0</maven>
     </prerequisites>
 
     <build>
@@ -105,7 +105,7 @@
                 <version>3.2.2</version>
                 <configuration>
                     <args>
-                        <arg>-target:jvm-1.8</arg>
+                        <arg>-target:jvm-1.7</arg>
                         <arg>-no-specialization</arg>
                         <arg>-deprecation</arg>
                     </args>

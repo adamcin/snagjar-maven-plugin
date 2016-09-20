@@ -33,7 +33,7 @@ import org.apache.maven.artifact.repository.{ArtifactRepository, ArtifactReposit
 import org.apache.maven.plugins.annotations.{Component, Parameter}
 import org.apache.maven.repository.RepositorySystem
 import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout
-import org.apache.maven.settings.Settings
+import org.apache.maven.settings.{Repository, RepositoryPolicy, Settings}
 
 import scala.Option
 import org.apache.maven.project.artifact.ProjectArtifactMetadata
@@ -41,6 +41,8 @@ import org.apache.maven.artifact.metadata.ArtifactMetadata
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest
 import org.apache.maven.execution.MavenSession
+
+import scala.util.Try
 
 /**
  * Trait defining common mojo parameters and methods useful for accessing maven repositories
@@ -96,8 +98,36 @@ trait AccessToRepositories {
     }
 
   lazy val repositoryRequest: RepositoryRequest = {
+    import scala.collection.JavaConverters._
     val request = DefaultRepositoryRequest.getRepositoryRequest(session, null)
     request.setLocalRepository(localRepository)
+    val activeProfiles = settings.getActiveProfiles.asScala.toSet
+
+
+    val defaultSnapshotPolicy = new ArtifactRepositoryPolicy(false, ArtifactRepositoryPolicy.UPDATE_POLICY_ALWAYS, ArtifactRepositoryPolicy.CHECKSUM_POLICY_IGNORE)
+    val defaultReleasePolicy = new ArtifactRepositoryPolicy(true, ArtifactRepositoryPolicy.UPDATE_POLICY_DAILY, ArtifactRepositoryPolicy.CHECKSUM_POLICY_WARN)
+    def getPolicies(repo: Repository): (ArtifactRepositoryPolicy, ArtifactRepositoryPolicy) = {
+      val snapshots = Option(repo.getSnapshots).map { policy =>
+        new ArtifactRepositoryPolicy(policy.isEnabled, policy.getUpdatePolicy, policy.getChecksumPolicy)
+      }.getOrElse(defaultSnapshotPolicy)
+      val releases = Option(repo.getReleases).map { policy =>
+        new ArtifactRepositoryPolicy(policy.isEnabled, policy.getUpdatePolicy, policy.getChecksumPolicy)
+      }.getOrElse(defaultReleasePolicy)
+      (snapshots, releases)
+    }
+
+    val settingsRepos = settings.getProfiles.asScala.filter(p => activeProfiles.contains(p.getId)).foldLeft(List(Try(repositorySystem.createDefaultRemoteRepository()))) { (acc, p) =>
+      acc ++ p.getRepositories.asScala.toList.map { settingsRepo =>
+        val (snapshots, releases) = getPolicies(settingsRepo)
+
+        Try(repositorySystem.createArtifactRepository(
+          settingsRepo.getId,
+          settingsRepo.getUrl,
+          repositoryLayouts.get(Option(settingsRepo.getLayout).getOrElse("default")), snapshots, releases))
+      }
+    }
+
+    request.setRemoteRepositories(settingsRepos.map(_.get).asJava)
     request
   }
 
