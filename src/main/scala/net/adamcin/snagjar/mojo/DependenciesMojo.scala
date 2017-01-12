@@ -30,13 +30,14 @@ package net.adamcin.snagjar.mojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 import java.io.File
 
-import org.apache.maven.model.{Dependency, DependencyManagement, Model}
+import org.apache.maven.model._
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer
 
 import scalax.io.Resource
 import collection.immutable.TreeSet
 import org.apache.maven.plugin.MojoExecutionException
 import net.adamcin.snagjar.{AccessToRepositories, GAV, Snaggable}
+import org.apache.maven.artifact.repository.{ArtifactRepository, ArtifactRepositoryPolicy}
 
 object DependenciesMojo {
   final val PROP_SCOPE = "scope"
@@ -101,6 +102,43 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
     }
   }
 
+  def convertSettingsRepo(it: org.apache.maven.settings.Repository): Repository = {
+    def convertPolicy(otherPolicy: org.apache.maven.settings.RepositoryPolicy): RepositoryPolicy = {
+      val policy = new RepositoryPolicy()
+      policy.setEnabled(otherPolicy.isEnabled)
+      policy.setUpdatePolicy(otherPolicy.getUpdatePolicy)
+      policy.setChecksumPolicy(otherPolicy.getChecksumPolicy)
+      policy
+    }
+
+    val repo = new Repository()
+    repo.setId(it.getId)
+    repo.setLayout(it.getLayout)
+    repo.setUrl(it.getUrl)
+    repo.setName(it.getName)
+    repo.setReleases(convertPolicy(it.getReleases))
+    repo.setSnapshots(convertPolicy(it.getSnapshots))
+    repo
+  }
+
+  def convertArtifactRepo(it: ArtifactRepository): Repository = {
+    def convertPolicy(otherPolicy: ArtifactRepositoryPolicy): RepositoryPolicy = {
+      val policy = new RepositoryPolicy()
+      policy.setEnabled(otherPolicy.isEnabled)
+      policy.setUpdatePolicy(otherPolicy.getUpdatePolicy)
+      policy.setChecksumPolicy(otherPolicy.getChecksumPolicy)
+      policy
+    }
+
+    val repo = new Repository()
+    repo.setId(it.getId)
+    repo.setLayout(it.getLayout.getId)
+    repo.setUrl(it.getUrl)
+    repo.setReleases(convertPolicy(it.getReleases))
+    repo.setSnapshots(convertPolicy(it.getSnapshots))
+    repo
+  }
+
   def end(context: TreeSet[GAV]) {
     val model = new Model
     val dm = new DependencyManagement
@@ -112,6 +150,12 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
 
     model.setDependencyManagement(dm)
 
+    if (reposFromSettings.nonEmpty) {
+      import scala.collection.JavaConverters._
+      val repos = reposFromSettings.map(convertSettingsRepo)
+      model.setRepositories(repos.asJava)
+    }
+
     mergeGavs(context) foreach { gav => dm.addDependency(gavToDep(gav)) }
 
     getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
@@ -120,22 +164,32 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
   }
 
   def buildDescription(): String = {
-    val groupId = pluginProps("groupId")
-    val artifactId = pluginProps("artifactId")
-    val version = pluginProps("version")
+    import scala.collection.JavaConverters._
     import DependenciesMojo._
     import AbstractSnagJarMojo.PROP_SNAG_FILE
     import AbstractSnagJarMojo.PROP_RECURSIVE
     import AccessToRepositories.PROP_GENERATE_POMS
-    val baseCommand = s"mvn $groupId:$artifactId:$version:$MOJO_NAME"
+
+    val groupId = pluginProps("groupId")
+    val artifactId = pluginProps("artifactId")
+    val version = pluginProps("version")
+
+    val profiles = if (!settings.getActiveProfiles.isEmpty) {
+      s"-P '${settings.getActiveProfiles.asScala.mkString(",")}'"
+    } else {
+      ""
+    }
+
+    val baseCommand = s"mvn $groupId:$artifactId:$version:$MOJO_NAME $profiles"
+
     val dRecursive = if (recursive) Some(s"$PROP_RECURSIVE") else None
     val dScope = Option(scope).map(it => s"$PROP_SCOPE=$it")
     val dGeneratePoms = if (generatePoms) Some(s"$PROP_GENERATE_POMS") else None
     val dMergeVersions = Some(s"$PROP_MERGE_VERSIONS=$mergeVersions")
     val dSnagFile = Some(s"$PROP_SNAG_FILE=${snagFile.getAbsolutePath}")
     val dList = List(dRecursive, dScope, dGeneratePoms, dMergeVersions, dSnagFile).flatten
-      .map(it => s"-D$it").mkString(" ").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    s"[regen cmd] $baseCommand $dList"
+      .map(it => s"-D$it").mkString(" ")
+    s"[regen cmd] $baseCommand $dList".replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
   }
 
   def mergeGavs(gavs: TreeSet[GAV]): List[GAV] = {

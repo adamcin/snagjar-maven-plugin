@@ -101,11 +101,18 @@ trait AccessToRepositories {
       case None => repositorySystem.createDefaultLocalRepository()
     }
 
+  lazy val reposFromSettings: List[Repository] = {
+    import collection.JavaConverters._
+    val activeProfiles = settings.getActiveProfiles.asScala.toSet
+    settings.getProfiles.asScala.filter(p => activeProfiles.contains(p.getId)).foldLeft(List.empty[Repository]) { (acc, p) =>
+      acc ++ p.getRepositories.asScala.toList
+    }
+  }
+
   lazy val repositoryRequest: RepositoryRequest = {
     import scala.collection.JavaConverters._
     val request = DefaultRepositoryRequest.getRepositoryRequest(session, null)
     request.setLocalRepository(localRepository)
-    val activeProfiles = settings.getActiveProfiles.asScala.toSet
 
 
     val defaultSnapshotPolicy = new ArtifactRepositoryPolicy(false, ArtifactRepositoryPolicy.UPDATE_POLICY_ALWAYS, ArtifactRepositoryPolicy.CHECKSUM_POLICY_IGNORE)
@@ -120,15 +127,17 @@ trait AccessToRepositories {
       (snapshots, releases)
     }
 
-    val settingsRepos = settings.getProfiles.asScala.filter(p => activeProfiles.contains(p.getId)).foldLeft(List(Try(repositorySystem.createDefaultRemoteRepository()))) { (acc, p) =>
-      acc ++ p.getRepositories.asScala.toList.map { settingsRepo =>
+    def convertSettingsRepo(settingsRepo: Repository): Try[ArtifactRepository] = {
         val (snapshots, releases) = getPolicies(settingsRepo)
 
         Try(repositorySystem.createArtifactRepository(
           settingsRepo.getId,
           settingsRepo.getUrl,
           repositoryLayouts.get(Option(settingsRepo.getLayout).getOrElse("default")), snapshots, releases))
-      }
+    }
+
+    val settingsRepos = reposFromSettings.foldLeft(List(Try(repositorySystem.createDefaultRemoteRepository()))) { (acc, settingsRepo) =>
+      convertSettingsRepo(settingsRepo) :: acc
     }
 
     request.setRemoteRepositories(settingsRepos.map(_.get).asJava)
