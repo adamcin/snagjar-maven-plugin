@@ -30,7 +30,17 @@ package net.adamcin.snagjar.mojo
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import java.io.File
+import java.util.Properties
+
 import net.adamcin.snagjar.{SnagSession, Snaggable}
+
+import scalax.io.Resource
+
+object AbstractSnagJarMojo {
+  final val PROP_FILTER = "filter"
+  final val PROP_SNAG_FILE = "snagFile"
+  final val PROP_RECURSIVE = "recursive"
+}
 
 /**
  * Base snagjar mojo defining common parameters and basic begin-iterate-end logic
@@ -76,6 +86,19 @@ abstract class AbstractSnagJarMojo[SnagContext] extends AbstractMojo {
    */
   @Parameter(property = "recursive")
   val recursive = false
+
+  lazy val pluginProps: Map[String, String] = {
+    Resource.fromURL(getClass.getResource("plugin.properties")).inputStream.acquireAndGet {
+      (f) => {
+        val props = new Properties
+        props.load(f)
+        List("name", "groupId", "artifactId", "version").foldLeft(Map.empty[String, String]) { (acc, key) =>
+          acc.updated(key, props.getProperty(key))
+        }
+      }
+    }
+  }
+
 
   // -----------------------------------------------
   // Methods to Override

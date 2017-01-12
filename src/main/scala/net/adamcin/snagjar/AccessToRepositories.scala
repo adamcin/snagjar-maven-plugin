@@ -44,6 +44,10 @@ import org.apache.maven.execution.MavenSession
 
 import scala.util.Try
 
+object AccessToRepositories {
+  final val PROP_GENERATE_POMS = "generatePoms"
+}
+
 /**
  * Trait defining common mojo parameters and methods useful for accessing maven repositories
  * @since 0.8.0
@@ -81,7 +85,7 @@ trait AccessToRepositories {
    * which omits dependencies and the parent pom reference
    * @since 1.2.0
    */
-  @Parameter(property = "generatePoms")
+  @Parameter(property = AccessToRepositories.PROP_GENERATE_POMS)
   val generatePoms: Boolean = false
 
   /**

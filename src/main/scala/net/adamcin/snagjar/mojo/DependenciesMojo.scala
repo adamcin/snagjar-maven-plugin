@@ -38,12 +38,18 @@ import collection.immutable.TreeSet
 import org.apache.maven.plugin.MojoExecutionException
 import net.adamcin.snagjar.{AccessToRepositories, GAV, Snaggable}
 
+object DependenciesMojo {
+  final val PROP_SCOPE = "scope"
+  final val PROP_MERGE_VERSIONS = "mergeVersions"
+  final val MOJO_NAME = "dependencies"
+}
+
 /**
  * Snags artifacts into a sorted, unique &lt;dependencyManagement&gt; block in a stub maven pom file
  * @since 0.8.0
  * @author Mark Adamcin
  */
-@Mojo(name = "dependencies", requiresProject = false)
+@Mojo(name = DependenciesMojo.MOJO_NAME, requiresProject = false)
 class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRepositories {
 
   // -----------------------------------------------
@@ -60,7 +66,7 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
   /**
    * Set the 'scope' element for all the snagged dependencies to this value
    */
-  @Parameter(property = "scope")
+  @Parameter(property = DependenciesMojo.PROP_SCOPE)
   val scope: String = null
 
   /**
@@ -70,7 +76,7 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
    * all versions in the dependencies, which would require manual correction
    * to remove duplicates before use in a project dependency tree
    */
-  @Parameter(property = "mergeVersions", defaultValue = "high")
+  @Parameter(property = DependenciesMojo.PROP_MERGE_VERSIONS, defaultValue = "high")
   val mergeVersions: String = "high"
 
 
@@ -100,6 +106,10 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
     val dm = new DependencyManagement
     val modelWriter = new MavenXpp3Writer
 
+    model.setModelVersion("4.0.0")
+    model.setPackaging("pom")
+    model.setDescription(buildDescription())
+
     model.setDependencyManagement(dm)
 
     mergeGavs(context) foreach { gav => dm.addDependency(gavToDep(gav)) }
@@ -107,6 +117,25 @@ class DependenciesMojo extends AbstractSnagJarMojo[TreeSet[GAV]] with AccessToRe
     getLog.info("Writing " + dm.getDependencies.size + " snagged dependencies to " + depsFile.getPath)
 
     Resource.fromFile(depsFile).outputStream.acquireAndGet(modelWriter.write(_, model))
+  }
+
+  def buildDescription(): String = {
+    val groupId = pluginProps("groupId")
+    val artifactId = pluginProps("artifactId")
+    val version = pluginProps("version")
+    import DependenciesMojo._
+    import AbstractSnagJarMojo.PROP_SNAG_FILE
+    import AbstractSnagJarMojo.PROP_RECURSIVE
+    import AccessToRepositories.PROP_GENERATE_POMS
+    val baseCommand = s"mvn $groupId:$artifactId:$version:$MOJO_NAME"
+    val dRecursive = if (recursive) Some(s"$PROP_RECURSIVE") else None
+    val dScope = Option(scope).map(it => s"$PROP_SCOPE=$it")
+    val dGeneratePoms = if (generatePoms) Some(s"$PROP_GENERATE_POMS") else None
+    val dMergeVersions = Some(s"$PROP_MERGE_VERSIONS=$mergeVersions")
+    val dSnagFile = Some(s"$PROP_SNAG_FILE=${snagFile.getAbsolutePath}")
+    val dList = List(dRecursive, dScope, dGeneratePoms, dMergeVersions, dSnagFile).flatten
+      .map(it => s"-D$it").mkString(" ").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    s"[regen cmd] $baseCommand $dList"
   }
 
   def mergeGavs(gavs: TreeSet[GAV]): List[GAV] = {
