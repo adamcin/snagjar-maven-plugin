@@ -27,7 +27,7 @@
 
 package net.adamcin.snagjar
 
-import org.apache.maven.plugins.annotations.Parameter
+import org.apache.maven.plugins.annotations.{Component, Parameter}
 import org.apache.maven.artifact.repository.ArtifactRepository
 import org.apache.maven.repository.ArtifactTransferListener
 
@@ -55,7 +55,9 @@ trait DeploysToRemoteRepository extends AccessToRepositories {
   lazy val remoteRepository: ArtifactRepository =
     (Option(repositoryId), Option(url)) match {
       case (Some(pId), Some(pUrl)) =>
-        repositorySystem.createArtifactRepository(pId, pUrl, layout, snapshotPolicy, releasePolicy)
+        val repo = repositorySystem.createArtifactRepository(pId, pUrl, layout, snapshotPolicy, releasePolicy)
+        repositorySystem.injectAuthentication(session.getRepositorySession, java.util.Arrays.asList(repo))
+        repo
       case (None, Some(pUrl)) =>
         repositorySystem.createArtifactRepository(null, pUrl, layout, snapshotPolicy, releasePolicy)
       case (_, _) =>
