@@ -27,9 +27,10 @@
 
 package net.adamcin.snagjar
 
-import org.apache.maven.plugins.annotations.{Component, Parameter}
 import org.apache.maven.artifact.repository.ArtifactRepository
+import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.repository.ArtifactTransferListener
+import org.eclipse.aether.RepositorySystemSession
 
 /**
  * Trait defining common mojo parameters and methods necessary for deployment of
@@ -56,6 +57,7 @@ trait DeploysToRemoteRepository extends AccessToRepositories {
     (Option(repositoryId), Option(url)) match {
       case (Some(pId), Some(pUrl)) =>
         val repo = repositorySystem.createArtifactRepository(pId, pUrl, layout, snapshotPolicy, releasePolicy)
+        val repoSession: RepositorySystemSession = session.getRepositorySession
         repositorySystem.injectAuthentication(session.getRepositorySession, java.util.Arrays.asList(repo))
         repo
       case (None, Some(pUrl)) =>
